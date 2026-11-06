@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <!-- ============================================================== -->
+    <!-- Payment screen (large screens). Small screens keep Odoo's       -->
+    <!-- layout: everything added below is guarded by !ui.isSmall or     -->
+    <!-- lives in the desktop branch of the template.                    -->
+    <!-- ============================================================== -->
+    <t t-name="garese_pos.PaymentScreen" t-inherit="point_of_sale.PaymentScreen" t-inherit-mode="extension">
+
+        <xpath expr="//t[@t-else='']/div[hasclass('payment-screen')]" position="attributes">
+            <attribute name="t-att-class">{ 'd-none': !props.isShown, 'gp-payment': true }</attribute>
+        </xpath>
+
+        <!-- The validation button moves under the numpad -->
+        <xpath expr="//div[hasclass('left-content')]/t[@t-call='point_of_sale.PaymentScreenValidate']" position="replace"/>
+        <xpath expr="//div[hasclass('center-content')]/Numpad" position="attributes">
+            <attribute name="onClick.bind">gpOnNumpadClick</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('center-content')]/Numpad" position="after">
+            <t t-call="point_of_sale.PaymentScreenValidate"/>
+        </xpath>
+
+        <!-- Amount to receive + one-tap amounts -->
+        <xpath expr="//div[hasclass('center-content')]/PaymentScreenStatus" position="before">
+            <t t-set="gpAmount" t-value="gpAmountState"/>
+            <div class="gp-pay-amount" t-attf-class="gp-pay-amount-{{gpAmount.key}}">
+                <div class="gp-pay-amount-label" t-esc="gpAmount.label"/>
+                <div class="gp-pay-amount-value" t-esc="gpAmount.amount"/>
+                <div class="gp-pay-quick">
+                    <button t-foreach="gpQuickAmounts" t-as="quick" t-key="quick.value" type="button"
+                            class="gp-pay-quick-btn" t-on-click="() => this.gpSetQuickAmount(quick.value)"
+                            t-esc="quick.label"/>
+                    <button type="button" class="gp-pay-quick-btn gp-pay-exact" t-on-click="gpSetExactAmount">
+                        Exact amount
+                    </button>
+                </div>
+            </div>
+        </xpath>
+
+        <!-- Order recap -->
+        <xpath expr="//div[hasclass('right-content')]" position="inside">
+            <div class="gp-pay-recap">
+                <div class="gp-pay-recap-head">
+                    <i class="fa fa-shopping-basket"/>
+                    <span class="gp-pay-recap-count" t-esc="gpItemCountLabel"/>
+                    <button type="button" class="gp-pay-edit" t-on-click="() => pos.showScreen('ProductScreen')">Edit</button>
+                </div>
+                <div class="gp-pay-lines">
+                    <div t-foreach="gpRecapLines" t-as="line" t-key="line.key" class="gp-pay-line"
+                         t-att-class="{ 'gp-pay-line-child': line.isChild }">
+                        <div class="gp-pay-line-img">
+                            <img t-if="line.imageUrl" t-att-src="line.imageUrl" t-att-alt="line.name"/>
+                            <i t-else="" class="fa fa-cube"/>
+                        </div>
+                        <div class="gp-pay-line-name" t-esc="line.name"/>
+                        <div class="gp-pay-line-detail" t-esc="line.detail"/>
+                        <div class="gp-pay-line-total" t-esc="line.total"/>
+                    </div>
+                </div>
+                <t t-set="gpSum" t-value="gpSummary"/>
+                <div class="gp-pay-sums">
+                    <div class="gp-pay-sum"><span>Subtotal</span><span t-esc="gpSum.subtotal"/></div>
+                    <div class="gp-pay-sum" t-att-class="{ 'gp-has-discount': gpSum.hasDiscount }">
+                        <span>Discount</span><span t-esc="gpSum.discount"/>
+                    </div>
+                    <div class="gp-pay-sum">
+                        <span>Taxes<t t-if="gpSum.taxRate"> (<t t-esc="gpSum.taxRate"/>)</t></span>
+                        <span t-esc="gpSum.tax"/>
+                    </div>
+                </div>
+                <div class="gp-pay-total">
+                    <span>Total</span>
+                    <span class="gp-pay-total-value" t-esc="gpSum.total"/>
+                </div>
+            </div>
+            <button type="button" class="gp-pay-note" t-att-class="{ 'gp-has-note': currentOrder.gp_note }"
+                    t-on-click="gpEditNote">
+                <i class="fa fa-commenting"/>
+                <span t-if="currentOrder.gp_note" class="gp-pay-note-text" t-esc="currentOrder.gp_note"/>
+                <span t-else="">Customer Note</span>
+            </button>
+        </xpath>
+    </t>
+
+    <!-- Title bar: explicit "back to sale" label and a hint -->
+    <t t-name="garese_pos.PaymentScreenTop" t-inherit="point_of_sale.PaymentScreenTop" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('button') and hasclass('back')]" position="inside">
+            <span t-if="!(pos.config.set_tip_after_payment and currentOrder.is_paid())" class="gp-back-text">Back to sale</span>
+        </xpath>
+        <xpath expr="//div[hasclass('top-content-center')]" position="inside">
+            <p class="gp-pay-hint">Please select a payment method and enter the amount.</p>
+        </xpath>
+    </t>
+
+    <!-- Validation button: label + amount (the standard label stays in the
+         DOM for the modules that replace it) -->
+    <t t-name="garese_pos.PaymentScreenValidate" t-inherit="point_of_sale.PaymentScreenValidate" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('button') and hasclass('next')]" position="inside">
+            <t t-if="!ui.isSmall and !(pos.config.set_tip_after_payment and currentOrder.is_paid())">
+                <span class="gp-validate-text">Validate payment</span>
+                <span class="gp-validate-amount" t-esc="gpFormat(gpTotalToPay)"/>
+            </t>
+        </xpath>
+    </t>
+
+    <!-- Payment methods: icon tile, selected state, totals card -->
+    <t t-name="garese_pos.PaymentScreenMethods" t-inherit="point_of_sale.PaymentScreenMethods" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('paymentmethod')]" position="attributes">
+            <attribute name="t-att-class">{ 'gp-selected': !ui.isSmall and gpIsMethodSelected(paymentMethod) }</attribute>
+        </xpath>
+        <xpath expr="//img[hasclass('payment-method-icon')]" position="attributes">
+            <attribute name="t-if">ui.isSmall or paymentMethod.image</attribute>
+        </xpath>
+        <xpath expr="//img[hasclass('payment-method-icon')]" position="after">
+            <span t-if="!ui.isSmall and !paymentMethod.image"
+                  t-attf-class="gp-pm-icon gp-pm-{{gpMethodColor(paymentMethod)}}">
+                <i t-attf-class="fa {{gpMethodIcon(paymentMethod)}}"/>
+            </span>
+        </xpath>
+        <xpath expr="//span[hasclass('payment-name')]" position="after">
+            <i t-if="!ui.isSmall" class="fa fa-angle-right gp-pm-chevron"/>
+        </xpath>
+        <xpath expr="//PaymentScreenPaymentLines" position="after">
+            <t t-if="!ui.isSmall">
+                <t t-set="gpTot" t-value="gpTotals"/>
+                <div class="gp-pay-totals">
+                    <div class="gp-pay-totals-label">Total to pay</div>
+                    <div class="gp-pay-totals-value" t-esc="gpTot.total"/>
+                    <div class="gp-pay-totals-row">
+                        <span>Amount received</span>
+                        <span class="gp-pay-received" t-esc="gpTot.received"/>
+                    </div>
+                    <div t-if="gpTot.hasChange" class="gp-pay-totals-row gp-pay-totals-change">
+                        <span>Change to give back</span>
+                        <span class="gp-pay-change" t-esc="gpTot.change"/>
+                    </div>
+                    <div t-else="" class="gp-pay-totals-row" t-att-class="{ 'gp-pay-totals-due': !gpTot.isSettled }">
+                        <span>Remaining to pay</span>
+                        <span class="gp-pay-remaining" t-esc="gpTot.remaining"/>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </t>
+
+    <!-- Payment lines: reference of the transaction (click to edit) -->
+    <t t-name="garese_pos.PaymentScreenPaymentLines" t-inherit="point_of_sale.PaymentScreenPaymentLines" t-inherit-mode="extension">
+        <xpath expr="//span[hasclass('payment-name')]" position="after">
+            <span t-if="line.transaction_id and line.payment_method.gp_ask_reference" class="gp-pl-ref">
+                <t t-esc="line.transaction_id"/>
+            </span>
+        </xpath>
+    </t>
+
+    <!-- Customer button: "walk-in" label when no customer is set -->
+    <t t-name="garese_pos.PaymentScreenButtons" t-inherit="point_of_sale.PaymentScreenButtons" t-inherit-mode="extension">
+        <xpath expr="//button[hasclass('partner-button')]" position="inside">
+            <t t-if="!ui.isSmall">
+                <span t-if="!currentOrder.get_partner()" class="gp-walkin">Walk-in Customer</span>
+                <i class="fa fa-pencil gp-partner-edit"/>
+            </t>
+        </xpath>
+    </t>
+
+</templates>

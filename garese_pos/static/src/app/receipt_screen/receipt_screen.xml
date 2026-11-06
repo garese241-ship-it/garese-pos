@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <!-- ============================================================== -->
+    <!-- "Payment successful" screen (large screens)                     -->
+    <!-- The standard buttons and email form stay in the DOM (hidden by  -->
+    <!-- CSS): the standard code still drives their icons through refs.  -->
+    <!-- ============================================================== -->
+    <t t-name="garese_pos.ReceiptScreen" t-inherit="point_of_sale.ReceiptScreen" t-inherit-mode="extension">
+
+        <xpath expr="//div[hasclass('receipt-screen')]" position="attributes">
+            <attribute name="t-att-class">{ 'gp-receipt-screen': !ui.isSmall }</attribute>
+        </xpath>
+
+        <xpath expr="//div[hasclass('actions')]//h1" position="before">
+            <div t-if="!ui.isSmall" class="gp-rs-check"><i class="fa fa-check"/></div>
+        </xpath>
+        <xpath expr="//div[hasclass('actions')]//h1" position="after">
+            <t t-if="!ui.isSmall">
+                <div class="gp-rs-sub">
+                    <div>The customer paid <b t-esc="gpPaidAmount"/></div>
+                    <div>Please hand the receipt to the customer.</div>
+                </div>
+                <div class="gp-rs-actions">
+                    <button type="button" class="gp-rs-btn gp-rs-primary gp-rs-print" t-on-click="gpPrint">
+                        <i t-attf-class="fa {{ gpState.printing ? 'fa-circle-o-notch fa-spin' : 'fa-print' }}"/>
+                        Print receipt
+                    </button>
+                    <button type="button" class="gp-rs-btn gp-rs-email" t-on-click="gpSendEmail">
+                        <i t-attf-class="fa {{ gpState.sending ? 'fa-circle-o-notch fa-spin' : 'fa-envelope-o' }}"/>
+                        Send by email
+                    </button>
+                </div>
+            </t>
+        </xpath>
+
+        <!-- Bottom bar: explicit "New sale" label + print again -->
+        <xpath expr="//div[hasclass('validation-buttons')]/button[@name='done']" position="inside">
+            <span class="gp-rs-label"><i class="fa fa-shopping-cart"/> New sale</span>
+        </xpath>
+        <xpath expr="//div[hasclass('validation-buttons')]" position="inside">
+            <button type="button" class="gp-rs-btn gp-rs-primary gp-rs-reprint" t-on-click="gpPrint">
+                <i t-attf-class="fa {{ gpState.printing ? 'fa-circle-o-notch fa-spin' : 'fa-print' }}"/>
+                Print again
+            </button>
+            <button type="button" class="gp-rs-btn gp-rs-share" t-on-click="gpShare">
+                <i t-attf-class="fa {{ gpState.sharing ? 'fa-circle-o-notch fa-spin' : 'fa-share-alt' }}"/>
+                Share
+            </button>
+        </xpath>
+    </t>
+
+    <!-- ============================================================== -->
+    <!-- Sales receipt                                                   -->
+    <!-- ============================================================== -->
+    <t t-name="garese_pos.ReceiptHeader" t-inherit="point_of_sale.ReceiptHeader" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('pos-receipt-contact')]/div[@t-esc='props.data.company.partner_id[1]']" position="after">
+            <t t-if="props.data.gp">
+                <div t-if="props.data.gp.street" class="gp-rc-address" t-esc="props.data.gp.street"/>
+                <div t-if="props.data.gp.cityLine" class="gp-rc-address" t-esc="props.data.gp.cityLine"/>
+            </t>
+        </xpath>
+    </t>
+
+    <t t-name="garese_pos.OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('pos-receipt')]" position="attributes">
+            <attribute name="t-att-class">{ 'gp-receipt': props.data.gp, 'gp-rc-no-tax': props.data.gp and !props.data.gp.showTax }</attribute>
+            <attribute name="t-attf-class">gp-rc-font-{{ props.data.gp ? props.data.gp.font : 'normal' }}</attribute>
+        </xpath>
+
+        <!-- Title, number, who / when, column titles
+             (Designation, Qty, Unit price, Total price - in that order) -->
+        <xpath expr="//ReceiptHeader" position="after">
+            <t t-if="props.data.gp">
+                <div class="gp-rc-title">
+                    <t t-if="props.data.isBill">Bill</t>
+                    <t t-else="">Till receipt</t>
+                </div>
+                <div class="gp-rc-number">No. <t t-esc="props.data.gp.number"/></div>
+                <div class="gp-rc-meta">
+                    <span>Date: <t t-esc="props.data.date"/></span>
+                    <span>Register: <t t-esc="props.data.gp.register"/></span>
+                    <span t-if="props.data.cashier">Cashier: <t t-esc="props.data.cashier"/></span>
+                    <span>Customer: <t t-if="props.data.gp.partner" t-esc="props.data.gp.partner"/><t t-else="">Walk-in</t></span>
+                    <span t-if="props.data.gp.waiter" class="gp-rc-waiter">Served by: <t t-esc="props.data.gp.waiter"/></span>
+                </div>
+                <div class="gp-rc-colhead">
+                    <span class="gp-rc-colname">Designation</span>
+                    <span class="gp-rc-nums">
+                        <span>Qty</span>
+                        <span>Unit price</span>
+                        <span>Total price</span>
+                    </span>
+                </div>
+            </t>
+        </xpath>
+
+        <!-- Subtotal / discount / taxes above the total -->
+        <xpath expr="//div[hasclass('pos-receipt-right-align')]" position="before">
+            <div t-if="props.data.gp" class="gp-rc-sums">
+                <div><span>Subtotal</span><span t-esc="props.formatCurrency(props.data.gp.subtotal)"/></div>
+                <div><span>Discount</span><span><t t-if="props.data.gp.discount">- </t><t t-esc="props.formatCurrency(props.data.gp.discount)"/></span></div>
+                <div t-if="props.data.gp.showTax">
+                    <span>Taxes<t t-if="props.data.gp.taxRate"> (<t t-esc="props.data.gp.taxRate"/>)</t></span>
+                    <span t-esc="props.formatCurrency(props.data.gp.tax)"/>
+                </div>
+            </div>
+        </xpath>
+
+        <!-- Reference of the payment (mobile money, cheque...) -->
+        <xpath expr="//div[hasclass('paymentlines')]" position="inside">
+            <div t-if="line.gp_reference" class="gp-rc-ref">Ref.: <t t-esc="line.gp_reference"/></div>
+        </xpath>
+
+        <!-- Note typed on the payment screen -->
+        <xpath expr="//div[hasclass('before-footer')]" position="before">
+            <div t-if="props.data.gp?.note" class="gp-rc-note" t-esc="props.data.gp.note"/>
+        </xpath>
+    </t>
+
+    <!-- Order line: cells of the 4-column receipt (shown by CSS in .gp-receipt only) -->
+    <t t-name="garese_pos.OrderlineReceipt" t-inherit="point_of_sale.Orderline" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('product-price')]" position="after">
+            <span t-if="line.gpQty" class="gp-rc-nums">
+                <span class="gp-rc-cell gp-rc-qty" t-esc="line.gpQty"/>
+                <span class="gp-rc-cell gp-rc-pu" t-esc="line.gpUnitPrice"/>
+                <span class="gp-rc-cell gp-rc-total" t-esc="line.gpPrice"/>
+            </span>
+        </xpath>
+    </t>
+
+    <!-- Preparation ticket (kitchen / bar printer): who serves the order -->
+    <t t-name="garese_pos.OrderChangeReceipt" t-inherit="point_of_sale.OrderChangeReceipt" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('pos-receipt')]" position="attributes">
+            <attribute name="t-attf-class">gp-rc-font-{{ (changes.new[0] or changes.cancelled[0] or {}).gp_font or 'normal' }}</attribute>
+        </xpath>
+        <xpath expr="//t[@t-if='changes.floor_name || changes.table_name']" position="after">
+            <t t-set="gpWaiter" t-value="(changes.new[0] or changes.cancelled[0] or {}).gp_waiter"/>
+            <div t-if="gpWaiter" class="gp-prep-waiter">Served by: <t t-esc="gpWaiter"/></div>
+        </xpath>
+    </t>
+
+</templates>

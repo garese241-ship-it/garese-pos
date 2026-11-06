@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="gp_pos_category_form_view" model="ir.ui.view">
+        <field name="name">pos.category.form.garese.pos</field>
+        <field name="model">pos.category</field>
+        <field name="inherit_id" ref="point_of_sale.product_pos_category_form_view"/>
+        <field name="arch" type="xml">
+            <field name="parent_id" position="after">
+                <field name="gp_color"/>
+                <field name="gp_icon" placeholder="fa-coffee"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="gp_pos_category_tree_view" model="ir.ui.view">
+        <field name="name">pos.category.tree.garese.pos</field>
+        <field name="model">pos.category</field>
+        <field name="inherit_id" ref="point_of_sale.product_pos_category_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="display_name" position="after">
+                <field name="gp_color" optional="show"/>
+                <field name="gp_icon" optional="show"/>
+            </field>
+        </field>
+    </record>
+</odoo>

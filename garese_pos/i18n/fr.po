@@ -1,0 +1,2422 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* garese_pos
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-02 13:36+0000\n"
+"PO-Revision-Date: 2026-11-02 13:36+0000\n"
+"Last-Translator: \n"
+"Language-Team: GARESE\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: garese_pos
+#. odoo-python
+#: code:addons/garese_pos/models/pos_cashier_control.py:0
+#, python-format
+msgid "%(manager)s authorized the %(what)s for %(cashier)s."
+msgstr "%(manager)s a autorisé : %(what)s pour %(cashier)s."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen_patch.js:0
+#: code:addons/garese_pos/static/src/app/product_screen/product_screen_patch.js:0
+#, python-format
+msgid "%s items"
+msgstr "%s articles"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/category_bar/category_bar.js:0
+#, python-format
+msgid "%s products"
+msgstr "%s produits"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen_patch.js:0
+#: code:addons/garese_pos/static/src/app/product_screen/product_screen_patch.js:0
+#, python-format
+msgid "1 item"
+msgstr "1 article"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/category_bar/category_bar.js:0
+#, python-format
+msgid "1 product"
+msgstr "1 produit"
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_pos_config__gp_close_requires_manager
+#: model:ir.model.fields,help:garese_pos.field_res_config_settings__pos_gp_close_requires_manager
+msgid ""
+"A cashier can only close the session after a manager of the Point of Sale "
+"typed his Odoo password on the register. The manager who authorized the "
+"closing is recorded on the session."
+msgstr ""
+"Un caissier ne peut fermer la session qu'après qu'un responsable du point de"
+" vente a saisi son mot de passe Odoo sur la caisse. Le responsable qui a "
+"autorisé la clôture est enregistré sur la session."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/cashier_control/cashier_control.js:0
+#, python-format
+msgid "A manager must type his password to close the session."
+msgstr "Un responsable doit saisir son mot de passe pour fermer la session."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/cashier_control/cashier_control.js:0
+#, python-format
+msgid ""
+"A manager's authorization needs the server. Check the network and try again."
+msgstr ""
+"L'autorisation du responsable nécessite le serveur. Vérifiez le réseau et "
+"réessayez."
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_garese_pos_waiter__active
+msgid "Active"
+msgstr "Actif"
+
+#. module: garese_pos
+#: model_terms:ir.actions.act_window,help:garese_pos.gp_pos_waiter_action
+msgid "Add the waiters of your Point of Sale"
+msgstr "Ajoutez les serveurs et serveuses de votre point de vente"
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_res_users__gp_pos_cashier_only
+msgid ""
+"After login, the user goes straight to the Point of Sale and has no Odoo "
+"menu. Not applied to Point of Sale managers."
+msgstr ""
+"Après connexion, l'utilisateur arrive directement sur la caisse et n'a aucun"
+" menu Odoo. Non appliqué aux responsables du point de vente."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/category_bar/category_bar.xml:0
+#: code:addons/garese_pos/static/src/app/products/products_widget_patch.js:0
+#, python-format
+msgid "All"
+msgstr "Tous"
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_pos_waiter_view_tree
+msgid "All Points of Sale"
+msgstr "Tous les points de vente"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "All cash desks"
+msgstr "Toutes les caisses"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/products/products_widget_patch.js:0
+#: code:addons/garese_pos/static/src/app/products/products_widget_patch.js:0
+#, python-format
+msgid "All products"
+msgstr "Tous les produits"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/product_screen/product_screen_patch.js:0
+#, python-format
+msgid "All the lines of the current order will be removed."
+msgstr "Toutes les lignes de la commande en cours seront supprimées."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Amount"
+msgstr "Montant"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen.xml:0
+#, python-format
+msgid "Amount received"
+msgstr "Montant reçu"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen_patch.js:0
+#, python-format
+msgid "Amount to receive"
+msgstr "Montant à recevoir"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen_patch.js:0
+#, python-format
+msgid "Amount to refund"
+msgstr "Montant à rembourser"
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_pos_config__gp_quick_amounts
+#: model:ir.model.fields,help:garese_pos.field_res_config_settings__pos_gp_quick_amounts
+msgid ""
+"Amounts offered as one-tap buttons on the payment screen (typically the "
+"banknotes in circulation), separated by commas. Leave empty to hide them."
+msgstr ""
+"Montants proposés en un geste sur l'écran de paiement (en général les "
+"billets en circulation), séparés par des virgules. Laissez vide pour les "
+"masquer."
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_pos_config__gp_waiter_required
+#: model:ir.model.fields,help:garese_pos.field_res_config_settings__pos_gp_waiter_required
+msgid "An order cannot be paid before a waiter is selected."
+msgstr ""
+"Une commande ne peut pas être encaissée tant qu'aucun(e) serveur(se) n'est "
+"sélectionné(e)."
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_pos_waiter_view_search
+msgid "Archived"
+msgstr "Archivé"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_pos_payment_method__gp_ask_reference
+msgid "Ask for a Transaction Reference"
+msgstr "Demander une référence de transaction"
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid ""
+"At closing, cashiers only count the cash: no expected amounts, differences "
+"or sales report."
+msgstr ""
+"À la clôture, les caissiers comptent seulement l'argent : ni montants "
+"attendus, ni écarts, ni rapport de ventes."
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_pos_config__gp_low_stock_threshold
+#: model:ir.model.fields,help:garese_pos.field_res_config_settings__pos_gp_low_stock_threshold
+msgid "At or below this quantity the stock badge turns orange."
+msgstr ""
+"À partir de cette quantité (ou en dessous), le badge de stock passe à "
+"l'orange."
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_pos_session__gp_auth_until
+msgid "Authorization Valid Until"
+msgstr "Autorisation valable jusqu'à"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/cashier_control/manager_auth_popup.js:0
+#, python-format
+msgid "Authorize"
+msgstr "Autoriser"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Average basket"
+msgstr "Panier moyen"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen.xml:0
+#, python-format
+msgid "Back to sale"
+msgstr "Retour à la vente"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/control_buttons/control_buttons.xml:0
+#: code:addons/garese_pos/static/src/app/control_buttons/control_buttons.xml:0
+#: code:addons/garese_pos/static/src/app/control_buttons/control_buttons.xml:0
+#, python-format
+msgid "Bag"
+msgstr "Sac"
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Bag Button"
+msgstr "Bouton Sac"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_pos_config__gp_bag_product_id
+#: model:ir.model.fields,field_description:garese_pos.field_res_config_settings__pos_gp_bag_product_id
+msgid "Bag Product"
+msgstr "Article Sac"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/store/pos_store_patch.js:0
+#, python-format
+msgid "Bag product unavailable"
+msgstr "Article sac indisponible"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Balance"
+msgstr "Solde"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/store/pos_store_patch.js:0
+#, python-format
+msgid "Barcode or internal reference"
+msgstr "Code-barres ou référence interne"
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_pos_config__gp_popular_days
+#: model:ir.model.fields,help:garese_pos.field_res_config_settings__pos_gp_popular_days
+msgid ""
+"Best sellers are computed on the sales of this Point of Sale over this "
+"number of days."
+msgstr ""
+"Les meilleures ventes sont calculées sur les ventes de ce point de vente sur"
+" ce nombre de jours."
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Best sellers of this Point of Sale, shown first on the home view."
+msgstr ""
+"Meilleures ventes de ce point de vente, affichées en premier sur l'accueil."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Best-selling products"
+msgstr "Produits les plus vendus"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen.xml:0
+#, python-format
+msgid "Bill"
+msgstr "Addition"
+
+#. module: garese_pos
+#: model:ir.model.fields.selection,name:garese_pos.selection__pos_category__gp_color__blue
+#: model:ir.model.fields.selection,name:garese_pos.selection__pos_payment_method__gp_color__blue
+msgid "Blue"
+msgstr "Bleu"
+
+#. module: garese_pos
+#: model:ir.model.fields.selection,name:garese_pos.selection__pos_config__gp_ambiance__bright
+msgid "Bright"
+msgstr "Claire"
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid ""
+"Brightness of the Point of Sale screens. Soft and Dimmed replace the white "
+"backgrounds with a calm, less luminous tone."
+msgstr ""
+"Luminosité des écrans du point de vente. Douce et Tamisée remplacent les "
+"fonds blancs par un ton apaisant, moins lumineux."
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_pos_config__gp_ambiance
+#: model:ir.model.fields,help:garese_pos.field_res_config_settings__pos_gp_ambiance
+msgid ""
+"Brightness of the backgrounds of the Point of Sale. Soft and Dimmed replace "
+"the white areas with a calm, darker tone that is easier on the eyes; Bright "
+"is the white interface. Printed receipts are not affected."
+msgstr ""
+"Luminosité des fonds du point de vente. Douce et Tamisée remplacent les "
+"zones blanches par un ton apaisant, plus sombre, qui repose les yeux ; "
+"Claire correspond à l'interface blanche. Les tickets imprimés ne sont pas "
+"concernés."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/calculator/calculator.xml:0
+#, python-format
+msgid "Calculator"
+msgstr "Calculatrice"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/cashier_control/manager_auth_popup.js:0
+#, python-format
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/product_screen/product_screen.xml:0
+#, python-format
+msgid "Cart"
+msgstr "Panier"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_res_users__gp_pos_cashier_only
+msgid "Cash Register Only"
+msgstr "Caisse seule"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Cash desk"
+msgstr "Caisse"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Cash desk closed - %s"
+msgstr "Fermeture de la caisse - %s"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Cash desk opened - %s"
+msgstr "Ouverture de la caisse - %s"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Cash desks"
+msgstr "Caisses"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/navbar/navbar_patch.js:0
+#, python-format
+msgid "Cashier"
+msgstr "Caissier"
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Cashier Restrictions"
+msgstr "Restrictions des caissiers"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen.xml:0
+#, python-format
+msgid "Cashier:"
+msgstr "Caissier :"
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Cashiers Without Back-Office"
+msgstr "Caissiers sans back-office"
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid ""
+"Cashiers can use the Favorites filter but cannot star or unstar products."
+msgstr ""
+"Les caissiers peuvent utiliser le filtre Favoris mais ne peuvent pas ajouter"
+" ni retirer de favoris."
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_pos_config__gp_hide_paid_orders
+#: model:ir.model.fields,help:garese_pos.field_res_config_settings__pos_gp_hide_paid_orders
+msgid ""
+"Cashiers keep their ongoing orders and the paid orders of the current "
+"session (to reprint a ticket). Paid orders of earlier sessions are hidden "
+"unless a manager types his password."
+msgstr ""
+"Les caissiers gardent leurs commandes en cours et les commandes payées de la"
+" session en cours (pour réimprimer un ticket). Les commandes payées des "
+"sessions précédentes restent masquées sauf si un responsable saisit son mot "
+"de passe."
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid ""
+"Cashiers see their ongoing orders and the paid orders of the current session"
+" (reprint); earlier paid orders are hidden."
+msgstr ""
+"Les caissiers voient leurs commandes en cours et les commandes payées de la "
+"session en cours (réimpression) ; les commandes payées antérieures sont "
+"masquées."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/category_bar/category_bar.js:0
+#, python-format
+msgid "Categories"
+msgstr "Catégories"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen.xml:0
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen_patch.js:0
+#, python-format
+msgid "Change to give back"
+msgstr "Monnaie à rendre"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/cashier_control/manager_auth_popup.xml:0
+#, python-format
+msgid "Choose the manager"
+msgstr "Choisir le responsable"
+
+#. module: garese_pos
+#: model:ir.ui.menu,name:garese_pos.menu_gp_classic_dashboard
+msgid "Classic Dashboard"
+msgstr "Tableau de bord classique"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/calculator/calculator.xml:0
+#: code:addons/garese_pos/static/src/app/calculator/calculator.xml:0
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Close"
+msgstr "Fermer"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Closing"
+msgstr "Clôture"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_pos_session__gp_closing_authorized_by_id
+msgid "Closing Authorized By"
+msgstr "Clôture autorisée par"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_pos_config__gp_close_requires_manager
+#: model:ir.model.fields,field_description:garese_pos.field_res_config_settings__pos_gp_close_requires_manager
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Closing Authorized by a Manager"
+msgstr "Clôture autorisée par un responsable"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Closing Control"
+msgstr "Contrôle de clôture"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/cashier_control/cashier_control.js:0
+#, python-format
+msgid "Closing authorized by a manager"
+msgstr "Clôture autorisée par un responsable"
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_pos_category__gp_color
+msgid ""
+"Color of the category tile in the Point of Sale. Leave empty to let the "
+"Point of Sale pick one automatically."
+msgstr ""
+"Couleur de la tuile de la catégorie dans le point de vente. Laissez vide "
+"pour que le point de vente en choisisse une automatiquement."
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_pos_payment_method__gp_color
+msgid ""
+"Color of the icon on the payment screen. Leave empty for the default color "
+"of the payment type (cash, bank, customer account)."
+msgstr ""
+"Couleur de l'icône sur l'écran de paiement. Laissez vide pour la couleur par"
+" défaut du type de paiement (espèces, banque, compte client)."
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_garese_pos_waiter__company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: garese_pos
+#: model:ir.model,name:garese_pos.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de configuration"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Continue Selling"
+msgstr "Continuer la vente"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/cashier_control/cashier_control.xml:0
+#, python-format
+msgid ""
+"Count the cash in the drawer and type the amount. The totals are reserved to"
+" managers."
+msgstr ""
+"Comptez l'argent du tiroir-caisse et saisissez le montant. Les totaux sont "
+"réservés aux responsables."
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_garese_pos_waiter__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_garese_pos_waiter__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Current period"
+msgstr "Période en cours"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Customer"
+msgstr "Client"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen.xml:0
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen_patch.js:0
+#: model:ir.model.fields,field_description:garese_pos.field_pos_order__gp_note
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_view_pos_pos_form
+#, python-format
+msgid "Customer Note"
+msgstr "Note au client"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen.xml:0
+#, python-format
+msgid "Customer:"
+msgstr "Client :"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Customers served"
+msgstr "Clients servis"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Dashboard"
+msgstr "Tableau de bord"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen.xml:0
+#, python-format
+msgid "Date:"
+msgstr "Date :"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/product_screen/product_screen.xml:0
+#: code:addons/garese_pos/static/src/app/product_screen/product_screen.xml:0
+#, python-format
+msgid "Decrease quantity"
+msgstr "Diminuer la quantité"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen.xml:0
+#, python-format
+msgid "Designation"
+msgstr "Désignation"
+
+#. module: garese_pos
+#: model:ir.model.fields.selection,name:garese_pos.selection__pos_config__gp_ambiance__dim
+msgid "Dimmed"
+msgstr "Tamisée"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen.xml:0
+#: code:addons/garese_pos/static/src/app/product_screen/product_screen.xml:0
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen.xml:0
+#, python-format
+msgid "Discount"
+msgstr "Remise"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_garese_pos_waiter__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_pos_config__gp_show_stock
+#: model:ir.model.fields,help:garese_pos.field_res_config_settings__pos_gp_show_stock
+msgid ""
+"Display the quantity on hand of storable products in the Point of Sale."
+msgstr ""
+"Affiche la quantité en stock des produits stockables dans le point de vente."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen.xml:0
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Edit"
+msgstr "Modifier"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen_patch.js:0
+#, python-format
+msgid "Email address"
+msgstr "Adresse e-mail"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen_patch.js:0
+#, python-format
+msgid "Email sent."
+msgstr "E-mail envoyé"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/product_screen/product_screen.xml:0
+#: code:addons/garese_pos/static/src/app/product_screen/product_screen_patch.js:0
+#, python-format
+msgid "Empty"
+msgstr "Vider"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/product_screen/product_screen_patch.js:0
+#, python-format
+msgid "Empty the cart?"
+msgstr "Vider le panier ?"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/control_buttons/control_buttons.xml:0
+#: code:addons/garese_pos/static/src/app/control_buttons/control_buttons.xml:0
+#: code:addons/garese_pos/static/src/app/control_buttons/control_buttons.xml:0
+#: code:addons/garese_pos/static/src/app/navbar/navbar.xml:0
+#: code:addons/garese_pos/static/src/app/navbar/navbar.xml:0
+#: code:addons/garese_pos/static/src/app/store/pos_store_patch.js:0
+#, python-format
+msgid "Enter a code"
+msgstr "Saisir un code"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen_patch.js:0
+#, python-format
+msgid "Enter the reference of the %s payment before validating."
+msgstr "Saisissez la référence du paiement %s avant de valider."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen.xml:0
+#, python-format
+msgid "Exact amount"
+msgstr "Montant exact"
+
+#. module: garese_pos
+#: model:ir.model.fields.selection,name:garese_pos.selection__pos_config__gp_receipt_font__xlarge
+msgid "Extra large"
+msgstr "Très grande"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/products/products_widget.xml:0
+#: code:addons/garese_pos/static/src/app/products/products_widget.xml:0
+#, python-format
+msgid "Favorite"
+msgstr "Favori"
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_product_product__gp_pos_favorite
+#: model:ir.model.fields,help:garese_pos.field_product_template__gp_pos_favorite
+msgid ""
+"Favorite products are reachable in one tap from the Favorites filter of the "
+"Point of Sale."
+msgstr ""
+"Les produits favoris sont accessibles en un geste depuis le filtre Favoris "
+"du point de vente."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/products/products_widget_patch.js:0
+#, python-format
+msgid "Favorites"
+msgstr "Favoris"
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Favorites Reserved to Managers"
+msgstr "Favoris réservés aux responsables"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/store/pos_store_patch.js:0
+#, python-format
+msgid "Favorites cannot be changed while offline."
+msgstr "Les favoris ne peuvent pas être modifiés hors ligne."
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_pos_category__gp_icon
+msgid ""
+"Font Awesome 4 icon shown on the category tile, e.g. fa-coffee, fa-leaf, fa-"
+"snowflake-o. Leave empty for the default icon. When the category has an "
+"image and category images are enabled in the Point of Sale, the image is "
+"shown instead."
+msgstr ""
+"Icône Font Awesome 4 affichée sur la tuile de la catégorie, par ex. fa-"
+"coffee, fa-leaf, fa-snowflake-o. Laissez vide pour l'icône par défaut. Si la"
+" catégorie a une image et que les images de catégories sont activées dans le"
+" point de vente, l'image est affichée à la place."
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_pos_payment_method__gp_icon
+msgid ""
+"Font Awesome 4 icon shown on the payment screen, e.g. fa-money, fa-credit-"
+"card, fa-mobile, fa-university. Leave empty for the default icon. When the "
+"payment method has an image, the image is shown instead."
+msgstr ""
+"Icône Font Awesome 4 affichée sur l'écran de paiement, par ex. fa-money, fa-"
+"credit-card, fa-mobile, fa-university. Laissez vide pour l'icône par défaut."
+" Si le mode de paiement a une image, l'image est affichée à la place."
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_view_users_form_cashier_only
+msgid "GARESE POS"
+msgstr "GARESE POS"
+
+#. module: garese_pos
+#: model:ir.actions.client,name:garese_pos.action_gp_dashboard
+#: model:ir.model,name:garese_pos.model_garese_pos_dashboard
+msgid "GARESE POS Dashboard"
+msgstr "Tableau de bord GARESE POS"
+
+#. module: garese_pos
+#: model:ir.model.fields.selection,name:garese_pos.selection__pos_category__gp_color__green
+#: model:ir.model.fields.selection,name:garese_pos.selection__pos_payment_method__gp_color__green
+msgid "Green"
+msgstr "Vert"
+
+#. module: garese_pos
+#: model:ir.model.fields.selection,name:garese_pos.selection__pos_category__gp_color__grey
+#: model:ir.model.fields.selection,name:garese_pos.selection__pos_payment_method__gp_color__grey
+msgid "Grey"
+msgstr "Gris"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/products/products_widget.xml:0
+#: code:addons/garese_pos/static/src/app/products/products_widget.xml:0
+#, python-format
+msgid "Grid view"
+msgstr "Vue grille"
+
+#. module: garese_pos
+#: model:ir.model,name:garese_pos.model_ir_http
+msgid "HTTP Routing"
+msgstr "Routage HTTP"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/navbar/navbar.xml:0
+#, python-format
+msgid "Hide Calculator"
+msgstr "Masquer la calculatrice"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_pos_config__gp_hide_paid_orders
+#: model:ir.model.fields,field_description:garese_pos.field_res_config_settings__pos_gp_hide_paid_orders
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Hide Paid Orders from Cashiers"
+msgstr "Masquer les commandes payées aux caissiers"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_pos_config__gp_hide_closing_totals
+#: model:ir.model.fields,field_description:garese_pos.field_res_config_settings__pos_gp_hide_closing_totals
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Hide Totals from Cashiers"
+msgstr "Masquer les totaux aux caissiers"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/category_bar/category_bar.xml:0
+#, python-format
+msgid "Home"
+msgstr "Accueil"
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_pos_config__gp_stock_refresh_minutes
+#: model:ir.model.fields,help:garese_pos.field_res_config_settings__pos_gp_stock_refresh_minutes
+msgid ""
+"How often the Point of Sale re-reads the stock from the server, to reflect "
+"sales made on other registers. 0 disables the refresh."
+msgstr ""
+"Fréquence à laquelle le point de vente relit le stock sur le serveur, pour "
+"tenir compte des ventes des autres caisses. 0 désactive l'actualisation."
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_garese_pos_waiter__id
+msgid "ID"
+msgstr "ID"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_pos_payment_method__gp_icon
+msgid "Icon"
+msgstr "Icône"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_pos_payment_method__gp_color
+msgid "Icon Color"
+msgstr "Couleur de l'icône"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "In progress"
+msgstr "En cours"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/products/products_widget_patch.js:0
+#, python-format
+msgid "In stock"
+msgstr "En stock"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/products/products_widget_patch.js:0
+#, python-format
+msgid "In stock: %s"
+msgstr "En stock : %s"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/product_screen/product_screen.xml:0
+#: code:addons/garese_pos/static/src/app/product_screen/product_screen.xml:0
+#, python-format
+msgid "Increase quantity"
+msgstr "Augmenter la quantité"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen_patch.js:0
+#, python-format
+msgid "Invalid email."
+msgstr "E-mail invalide."
+
+#. module: garese_pos
+#. odoo-python
+#: code:addons/garese_pos/models/pos_dashboard.py:0
+#, python-format
+msgid "Invoiced"
+msgstr "Facturé"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Items"
+msgstr "Articles"
+
+#. module: garese_pos
+#: model:ir.model.fields.selection,name:garese_pos.selection__pos_config__gp_receipt_font__large
+msgid "Large"
+msgstr "Grande"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Last 30 days"
+msgstr "30 derniers jours"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Last 7 days"
+msgstr "7 derniers jours"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_pos_session__gp_auth_user_id
+msgid "Last Manager Authorization"
+msgstr "Dernière autorisation d'un responsable"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_garese_pos_waiter__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_garese_pos_waiter__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Latest transactions"
+msgstr "Dernières transactions"
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_pos_config__gp_use_waiter
+#: model:ir.model.fields,help:garese_pos.field_res_config_settings__pos_gp_use_waiter
+msgid ""
+"Let the cashier select, on each order, the waiter who serves the customers. "
+"The waiter is printed on the receipt and available in the sales analysis."
+msgstr ""
+"Permet au caissier de sélectionner, sur chaque commande, le serveur ou la "
+"serveuse qui sert les clients. Son nom est imprimé sur le ticket et "
+"disponible dans l'analyse des ventes."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/products/products_widget.xml:0
+#: code:addons/garese_pos/static/src/app/products/products_widget.xml:0
+#, python-format
+msgid "List view"
+msgstr "Vue liste"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Live activity"
+msgstr "Activité en temps réel"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Loading"
+msgstr "Chargement"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_pos_config__gp_low_stock_threshold
+#: model:ir.model.fields,field_description:garese_pos.field_res_config_settings__pos_gp_low_stock_threshold
+msgid "Low Stock Threshold"
+msgstr "Seuil de stock bas"
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Low stock at"
+msgstr "Stock bas à partir de"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/cashier_control/manager_auth_popup.xml:0
+#: code:addons/garese_pos/static/src/app/navbar/navbar_patch.js:0
+#, python-format
+msgid "Manager"
+msgstr "Responsable"
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_pos_session__gp_closing_authorized_by_id
+msgid "Manager who typed his password to let the cashier close the session."
+msgstr ""
+"Responsable qui a saisi son mot de passe pour permettre au caissier de "
+"fermer la session."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#: model:ir.model,name:garese_pos.model_ir_ui_menu
+#, python-format
+msgid "Menu"
+msgstr "Menu"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/category_bar/category_bar.xml:0
+#, python-format
+msgid "More"
+msgstr "Plus"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_garese_pos_waiter__name
+msgid "Name"
+msgstr "Nom"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/products/products_widget_patch.js:0
+#, python-format
+msgid "Name (A to Z)"
+msgstr "Nom (A à Z)"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "New Session"
+msgstr "Nouvelle session"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen.xml:0
+#, python-format
+msgid "New sale"
+msgstr "Nouvelle vente"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "No activity yet."
+msgstr "Aucune activité pour le moment."
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "No bag product"
+msgstr "Aucun article sac"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "No cash desk is configured yet."
+msgstr "Aucune caisse n'est configurée."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/cashier_control/cashier_control.js:0
+#, python-format
+msgid "No connection"
+msgstr "Pas de connexion"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/cashier_control/cashier_control.js:0
+#, python-format
+msgid "No manager"
+msgstr "Aucun responsable"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "No sale for this period."
+msgstr "Aucune vente sur cette période."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/products/products_widget_patch.js:0
+#, python-format
+msgid "No stock"
+msgstr "Rupture"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "No transaction yet."
+msgstr "Aucune transaction pour le moment."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/cashier_control/cashier_control.js:0
+#, python-format
+msgid ""
+"No user is manager of this Point of Sale: nobody can authorize this action."
+msgstr ""
+"Aucun utilisateur n'est responsable de ce point de vente : personne ne peut "
+"autoriser cette action."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/store/pos_store_patch.js:0
+#, python-format
+msgid "No waiter"
+msgstr "Aucun(e) serveur(se)"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen.xml:0
+#, python-format
+msgid "No."
+msgstr "N°"
+
+#. module: garese_pos
+#: model:ir.model.fields.selection,name:garese_pos.selection__pos_config__gp_receipt_font__normal
+msgid "Normal"
+msgstr "Normale"
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_pos_order__gp_note
+msgid ""
+"Note typed by the cashier on the payment screen and printed on the receipt."
+msgstr ""
+"Note saisie par le caissier sur l'écran de paiement et imprimée sur le "
+"ticket."
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_pos_config__gp_popular_limit
+#: model:ir.model.fields,field_description:garese_pos.field_res_config_settings__pos_gp_popular_limit
+msgid "Number of Popular Products"
+msgstr "Nombre de produits populaires"
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_pos_config__gp_popular_limit
+#: model:ir.model.fields,help:garese_pos.field_res_config_settings__pos_gp_popular_limit
+msgid "Number of best sellers shown on the home view. 0 hides the section."
+msgstr ""
+"Nombre de meilleures ventes affichées sur l'accueil. 0 masque la section."
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Number of products"
+msgstr "Nombre de produits"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Number of tickets"
+msgstr "Nombre de tickets"
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Numpad '+' keys"
+msgstr "Touches « + » du pavé"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_pos_config__gp_numpad_increments
+#: model:ir.model.fields,field_description:garese_pos.field_res_config_settings__pos_gp_numpad_increments
+msgid "Numpad Increments"
+msgstr "Incréments du pavé numérique"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/cashier_control/manager_auth_popup.xml:0
+#, python-format
+msgid "Odoo password of the manager"
+msgstr "Mot de passe Odoo du responsable"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/navbar/navbar.xml:0
+#, python-format
+msgid "Offline"
+msgstr "Hors ligne"
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid ""
+"One-tap amounts and '+' keys of the payment numpad, separated by commas."
+msgstr ""
+"Montants rapides et touches « + » du pavé de paiement, séparés par des "
+"virgules."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/navbar/navbar.xml:0
+#, python-format
+msgid "Online"
+msgstr "En ligne"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_pos_config__gp_favorite_manager_only
+#: model:ir.model.fields,field_description:garese_pos.field_res_config_settings__pos_gp_favorite_manager_only
+msgid "Only Managers Edit Favorites"
+msgstr "Seuls les responsables modifient les favoris"
+
+#. module: garese_pos
+#. odoo-python
+#: code:addons/garese_pos/models/product_template.py:0
+#, python-format
+msgid "Only Point of Sale users can change favorite products."
+msgstr ""
+"Seuls les utilisateurs du point de vente peuvent modifier les produits "
+"favoris."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Open Session"
+msgstr "Ouvrir la session"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Opened by %s"
+msgstr "Ouverte par %s"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Opening Control"
+msgstr "Contrôle d'ouverture"
+
+#. module: garese_pos
+#: model:ir.model.fields.selection,name:garese_pos.selection__pos_category__gp_color__orange
+#: model:ir.model.fields.selection,name:garese_pos.selection__pos_payment_method__gp_color__orange
+msgid "Orange"
+msgstr "Orange"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#: model:ir.model.fields,field_description:garese_pos.field_garese_pos_waiter__order_count
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_pos_waiter_view_tree
+#, python-format
+msgid "Orders"
+msgstr "Commandes"
+
+#. module: garese_pos
+#. odoo-python
+#: code:addons/garese_pos/models/pos_dashboard.py:0
+#, python-format
+msgid "Other methods"
+msgstr "Autres modes"
+
+#. module: garese_pos
+#. odoo-javascript
+#. odoo-python
+#: code:addons/garese_pos/models/pos_dashboard.py:0
+#: code:addons/garese_pos/models/pos_dashboard.py:0
+#: code:addons/garese_pos/static/src/app/products/products_widget.xml:0
+#, python-format
+msgid "Other products"
+msgstr "Autres produits"
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Over the last (days)"
+msgstr "Sur les derniers (jours)"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/navbar/navbar.xml:0
+#, python-format
+msgid "POS"
+msgstr "POS"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_product_product__gp_pos_favorite
+#: model:ir.model.fields,field_description:garese_pos.field_product_template__gp_pos_favorite
+msgid "POS Favorite"
+msgstr "Favori POS"
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_product_template_search_view
+msgid "POS Favorites"
+msgstr "Favoris POS"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/cashier_control/cashier_control.js:0
+#, python-format
+msgid "Paid orders"
+msgstr "Commandes payées"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Pause live updates"
+msgstr "Mettre en pause l'actualisation"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Payment"
+msgstr "Paiement"
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Payment Screen"
+msgstr "Écran de paiement"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen_patch.js:0
+#, python-format
+msgid "Payment complete"
+msgstr "Paiement complet"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Payment methods"
+msgstr "Modes de paiement"
+
+#. module: garese_pos
+#: model:ir.model.fields.selection,name:garese_pos.selection__pos_category__gp_color__pink
+#: model:ir.model.fields.selection,name:garese_pos.selection__pos_payment_method__gp_color__pink
+msgid "Pink"
+msgstr "Rose"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen.xml:0
+#, python-format
+msgid "Please hand the receipt to the customer."
+msgstr "Veuillez remettre le reçu au client."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen.xml:0
+#, python-format
+msgid "Please select a payment method and enter the amount."
+msgstr "Veuillez sélectionner un mode de paiement et saisir le montant."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Point of Sale"
+msgstr "Point de vente"
+
+#. module: garese_pos
+#: model:ir.model,name:garese_pos.model_pos_category
+msgid "Point of Sale Category"
+msgstr "Catégorie du point de vente"
+
+#. module: garese_pos
+#: model:ir.model,name:garese_pos.model_pos_config
+msgid "Point of Sale Configuration"
+msgstr "Configuration du point de vente"
+
+#. module: garese_pos
+#: model:ir.model,name:garese_pos.model_pos_order
+msgid "Point of Sale Orders"
+msgstr "Commandes du point de vente"
+
+#. module: garese_pos
+#: model:ir.model,name:garese_pos.model_report_pos_order
+msgid "Point of Sale Orders Report"
+msgstr "Rapport des commandes du point de vente"
+
+#. module: garese_pos
+#: model:ir.model,name:garese_pos.model_pos_payment_method
+msgid "Point of Sale Payment Methods"
+msgstr "Modes de paiement du point de vente"
+
+#. module: garese_pos
+#: model:ir.model,name:garese_pos.model_pos_session
+msgid "Point of Sale Session"
+msgstr "Session du point de vente"
+
+#. module: garese_pos
+#: model:ir.model,name:garese_pos.model_garese_pos_waiter
+msgid "Point of Sale Waiter"
+msgstr "Serveur(se) du point de vente"
+
+#. module: garese_pos
+#: model:res.groups,name:garese_pos.gp_group_pos_cashier_only
+msgid "Point of Sale: Cash Register Only"
+msgstr "Point de vente : caisse seule"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_garese_pos_waiter__pos_config_ids
+msgid "Points of Sale"
+msgstr "Points de vente"
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_garese_pos_waiter__pos_config_ids
+msgid ""
+"Points of Sale where this waiter can be selected. Leave empty for all of "
+"them."
+msgstr ""
+"Points de vente où ce serveur ou cette serveuse peut être sélectionné(e). "
+"Laissez vide pour tous."
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Popular Products"
+msgstr "Produits populaires"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/products/products_widget.xml:0
+#: code:addons/garese_pos/static/src/app/products/products_widget.xml:0
+#, python-format
+msgid "Popular product"
+msgstr "Produit populaire"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/products/products_widget_patch.js:0
+#, python-format
+msgid "Popular products"
+msgstr "Produits populaires"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_pos_config__gp_popular_days
+#: model:ir.model.fields,field_description:garese_pos.field_res_config_settings__pos_gp_popular_days
+msgid "Popularity Period (days)"
+msgstr "Période de popularité (jours)"
+
+#. module: garese_pos
+#. odoo-python
+#: code:addons/garese_pos/models/pos_dashboard.py:0
+#, python-format
+msgid "Posted"
+msgstr "Comptabilisé"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Previous period"
+msgstr "Période précédente"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/products/products_widget_patch.js:0
+#, python-format
+msgid "Price: high to low"
+msgstr "Prix décroissant"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/products/products_widget_patch.js:0
+#, python-format
+msgid "Price: low to high"
+msgstr "Prix croissant"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen.xml:0
+#, python-format
+msgid "Print again"
+msgstr "Imprimer à nouveau"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen.xml:0
+#, python-format
+msgid "Print receipt"
+msgstr "Imprimer le reçu"
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid ""
+"Print the tax line on the receipt. When disabled, the receipt shows tax-"
+"included amounts only."
+msgstr ""
+"Imprime la ligne TVA sur le ticket. Si désactivé, le ticket n'affiche que "
+"des montants TTC."
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_pos_config__gp_receipt_show_tax
+#: model:ir.model.fields,help:garese_pos.field_res_config_settings__pos_gp_receipt_show_tax
+msgid ""
+"Print the tax line on the receipt. When disabled, the receipt shows tax-"
+"included amounts only: subtotal, discount and total."
+msgstr ""
+"Imprime la ligne TVA sur le ticket. Si désactivé, le ticket n'affiche que "
+"des montants TTC : sous-total, remise et total."
+
+#. module: garese_pos
+#: model:ir.model,name:garese_pos.model_product_template
+msgid "Product"
+msgstr "Produit"
+
+#. module: garese_pos
+#: model:ir.model,name:garese_pos.model_product_product
+msgid "Product Variant"
+msgstr "Variante de produit"
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_pos_config__gp_bag_product_id
+#: model:ir.model.fields,help:garese_pos.field_res_config_settings__pos_gp_bag_product_id
+msgid ""
+"Product added to the order by the Bag button. Leave empty to hide the "
+"button."
+msgstr ""
+"Article ajouté à la commande par le bouton Sac. Laissez vide pour masquer le"
+" bouton."
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Product added to the order when the cashier taps the Bag button."
+msgstr ""
+"Article ajouté à la commande quand le caissier appuie sur le bouton Sac."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/products/products_widget_patch.js:0
+#, python-format
+msgid "Promo"
+msgstr "Promo"
+
+#. module: garese_pos
+#: model:ir.model.fields.selection,name:garese_pos.selection__pos_category__gp_color__purple
+#: model:ir.model.fields.selection,name:garese_pos.selection__pos_payment_method__gp_color__purple
+msgid "Purple"
+msgstr "Violet"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen.xml:0
+#, python-format
+msgid "Qty"
+msgstr "Qté"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_pos_config__gp_quick_amounts
+#: model:ir.model.fields,field_description:garese_pos.field_res_config_settings__pos_gp_quick_amounts
+msgid "Quick Amounts"
+msgstr "Montants rapides"
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Quick amounts"
+msgstr "Montants rapides"
+
+#. module: garese_pos
+#. odoo-python
+#: code:addons/garese_pos/models/pos_config.py:0
+#, python-format
+msgid ""
+"Quick amounts and numpad increments must be positive numbers separated by "
+"commas, for example: 5000, 10000, 20000."
+msgstr ""
+"Les montants rapides et les incréments du pavé doivent être des nombres "
+"positifs séparés par des virgules, par exemple : 5000, 10000, 20000."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen_patch.js:0
+#, python-format
+msgid "Receipt"
+msgstr "Ticket"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Receipt No."
+msgstr "N° de ticket"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_pos_config__gp_receipt_font
+#: model:ir.model.fields,field_description:garese_pos.field_res_config_settings__pos_gp_receipt_font
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Receipt Text Size"
+msgstr "Taille du texte des tickets"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen_patch.js:0
+#, python-format
+msgid "Receipt saved as a picture."
+msgstr "Reçu enregistré en image."
+
+#. module: garese_pos
+#: model:ir.model.fields.selection,name:garese_pos.selection__pos_category__gp_color__red
+#: model:ir.model.fields.selection,name:garese_pos.selection__pos_payment_method__gp_color__red
+msgid "Red"
+msgstr "Rouge"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen.xml:0
+#, python-format
+msgid "Ref.:"
+msgstr "Réf. :"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen_patch.js:0
+#, python-format
+msgid "Reference received from the operator or the bank"
+msgstr "Référence reçue de l'opérateur ou de la banque"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Refresh"
+msgstr "Actualiser"
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Refresh every (min)"
+msgstr "Actualiser toutes les (min)"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Refund %s%s - %s"
+msgstr "Remboursement %s%s - %s"
+
+#. module: garese_pos
+#. odoo-python
+#: code:addons/garese_pos/models/pos_dashboard.py:0
+#, python-format
+msgid "Refunded"
+msgstr "Remboursé"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen.xml:0
+#, python-format
+msgid "Register:"
+msgstr "Caisse :"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen.xml:0
+#, python-format
+msgid "Remaining to pay"
+msgstr "Reste à payer"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/product_screen/product_screen.xml:0
+#: code:addons/garese_pos/static/src/app/product_screen/product_screen.xml:0
+#, python-format
+msgid "Remove line"
+msgstr "Supprimer la ligne"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Reporting"
+msgstr "Analyse"
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Required before payment"
+msgstr "Obligatoire avant le paiement"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/products/products_widget_patch.js:0
+#, python-format
+msgid "Results for \"%s\""
+msgstr "Résultats pour « %s »"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Resume live updates"
+msgstr "Reprendre l'actualisation"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Sale %s%s - %s"
+msgstr "Vente %s%s - %s"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Sale time"
+msgstr "Heure"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Sales by cash desk"
+msgstr "Ventes par caisse"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Sales by category"
+msgstr "Ventes par catégorie"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Sales trend"
+msgstr "Évolution des ventes"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_pos_config__gp_ambiance
+#: model:ir.model.fields,field_description:garese_pos.field_res_config_settings__pos_gp_ambiance
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Screen Ambiance"
+msgstr "Ambiance de l'écran"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/navbar/navbar_patch.js:0
+#, python-format
+msgid "Search a product (name, code, barcode)..."
+msgstr "Rechercher un produit (nom, code, barcode)..."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "See"
+msgstr "Voir"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen.xml:0
+#, python-format
+msgid "Send by email"
+msgstr "Envoyer par e-mail"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen_patch.js:0
+#, python-format
+msgid "Send the receipt by email"
+msgstr "Envoyer le reçu par email"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen_patch.js:0
+#, python-format
+msgid "Sending email failed. Please try again."
+msgstr "L'envoi de l'e-mail a échoué. Veuillez réessayer."
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_garese_pos_waiter__sequence
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen.xml:0
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen.xml:0
+#, python-format
+msgid "Served by:"
+msgstr "Servi par :"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Session closed"
+msgstr "Session fermée"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Session open"
+msgstr "Session ouverte"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Sessions"
+msgstr "Sessions"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen.xml:0
+#, python-format
+msgid "Share"
+msgstr "Partager"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/navbar/navbar.xml:0
+#, python-format
+msgid "Show Calculator"
+msgstr "Afficher la calculatrice"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_pos_config__gp_show_stock
+#: model:ir.model.fields,field_description:garese_pos.field_res_config_settings__pos_gp_show_stock
+msgid "Show Stock on Products"
+msgstr "Afficher le stock sur les produits"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/products/products_widget.xml:0
+#, python-format
+msgid "Show more products"
+msgstr "Afficher plus de produits"
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Show the quantity left on each product of the Point of Sale."
+msgstr "Affiche la quantité restante sur chaque produit du point de vente."
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Size of the text on the receipts, bills and preparation tickets."
+msgstr ""
+"Taille du texte sur les tickets de caisse, les additions et les bons de "
+"préparation."
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_pos_config__gp_receipt_font
+#: model:ir.model.fields,help:garese_pos.field_res_config_settings__pos_gp_receipt_font
+msgid ""
+"Size of the text printed on the receipts, bills and preparation tickets. The"
+" width of the paper does not change: with a larger text, long product names "
+"take more lines."
+msgstr ""
+"Taille du texte imprimé sur les tickets de caisse, les additions et les bons"
+" de préparation. La largeur du papier ne change pas : avec un texte plus "
+"grand, les désignations longues prennent plus de lignes."
+
+#. module: garese_pos
+#: model:ir.model.fields.selection,name:garese_pos.selection__pos_config__gp_ambiance__soft
+msgid "Soft"
+msgstr "Douce"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/products/products_widget.xml:0
+#: code:addons/garese_pos/static/src/app/products/products_widget.xml:0
+#: code:addons/garese_pos/static/src/app/products/products_widget_patch.js:0
+#, python-format
+msgid "Sort products"
+msgstr "Trier les produits"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Status"
+msgstr "Statut"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_pos_config__gp_stock_refresh_minutes
+#: model:ir.model.fields,field_description:garese_pos.field_res_config_settings__pos_gp_stock_refresh_minutes
+msgid "Stock Refresh (minutes)"
+msgstr "Actualisation du stock (minutes)"
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Stock on Products"
+msgstr "Stock sur les produits"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/products/products_widget_patch.js:0
+#, python-format
+msgid "Stock: highest first"
+msgstr "Stock décroissant"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen.xml:0
+#: code:addons/garese_pos/static/src/app/product_screen/product_screen.xml:0
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen.xml:0
+#, python-format
+msgid "Subtotal"
+msgstr "Sous-total"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/navbar/navbar.xml:0
+#, python-format
+msgid "Sync error"
+msgstr "Erreur de synchro"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/navbar/navbar.xml:0
+#, python-format
+msgid "Syncing"
+msgstr "Synchronisation"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen.xml:0
+#: code:addons/garese_pos/static/src/app/product_screen/product_screen.xml:0
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen.xml:0
+#, python-format
+msgid "Taxes"
+msgstr "TVA"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_pos_config__gp_receipt_show_tax
+#: model:ir.model.fields,field_description:garese_pos.field_res_config_settings__pos_gp_receipt_show_tax
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Taxes on the Receipt"
+msgstr "TVA sur le ticket"
+
+#. module: garese_pos
+#: model:ir.model.fields.selection,name:garese_pos.selection__pos_category__gp_color__teal
+#: model:ir.model.fields.selection,name:garese_pos.selection__pos_payment_method__gp_color__teal
+msgid "Teal"
+msgstr "Turquoise"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/store/pos_store_patch.js:0
+#, python-format
+msgid "The bag product could not be loaded. Check the Point of Sale settings."
+msgstr ""
+"L'article sac n'a pas pu être chargé. Vérifiez les paramètres du point de "
+"vente."
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_pos_payment_method__gp_ask_reference
+msgid ""
+"The cashier must type the reference of the transaction (mobile money, "
+"transfer, cheque number...) when this payment method is used. The reference "
+"is stored on the payment and printed on the receipt."
+msgstr ""
+"Le caissier doit saisir la référence de la transaction (mobile money, "
+"virement, numéro de chèque...) quand ce mode de paiement est utilisé. La "
+"référence est enregistrée sur le paiement et imprimée sur le ticket."
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid ""
+"The cashier needs the Odoo password of a Point of Sale manager to close the "
+"session. The manager is recorded on the session."
+msgstr ""
+"Le caissier a besoin du mot de passe Odoo d'un responsable du point de vente"
+" pour fermer la session. Le responsable est enregistré sur la session."
+
+#. module: garese_pos
+#: model_terms:ir.actions.act_window,help:garese_pos.gp_pos_waiter_action
+msgid ""
+"The cashier selects one of them on each order: the waiter is printed on the "
+"receipt and you can analyse the sales per waiter."
+msgstr ""
+"Le caissier en sélectionne un(e) sur chaque commande : son nom est imprimé "
+"sur le ticket et vous pouvez analyser les ventes par serveur(se)."
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid ""
+"The cashier selects the waiter who serves the customers of each order. "
+"Printed on the receipt, available in the orders and in the sales analysis."
+msgstr ""
+"Le caissier sélectionne le serveur ou la serveuse qui sert les clients de "
+"chaque commande. Imprimé sur le ticket, disponible dans les commandes et "
+"dans l'analyse des ventes."
+
+#. module: garese_pos
+#. odoo-python
+#: code:addons/garese_pos/models/pos_cashier_control.py:0
+#, python-format
+msgid "The closing of the session must be authorized by a manager."
+msgstr "La clôture de la session doit être autorisée par un responsable."
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_pos_config__gp_hide_closing_totals
+#: model:ir.model.fields,help:garese_pos.field_res_config_settings__pos_gp_hide_closing_totals
+msgid ""
+"The closing screen no longer shows the expected amounts, the differences and"
+" the sales report to cashiers: they only count the cash. Everything appears "
+"once a manager types his password."
+msgstr ""
+"L'écran de clôture n'affiche plus aux caissiers les montants attendus, les "
+"écarts et le rapport de ventes : ils comptent seulement l'argent. Tout "
+"apparaît dès qu'un responsable saisit son mot de passe."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen.xml:0
+#, python-format
+msgid "The customer paid"
+msgstr "Le client a payé"
+
+#. module: garese_pos
+#: model:ir.model.constraint,message:garese_pos.constraint_pos_config_gp_popular_limit_positive
+msgid "The number of popular products cannot be negative."
+msgstr "Le nombre de produits populaires ne peut pas être négatif."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/cashier_control/cashier_control.js:0
+#, python-format
+msgid ""
+"The paid orders are reserved to managers. A manager must type his password."
+msgstr ""
+"Les commandes payées sont réservées aux responsables. Un responsable doit "
+"saisir son mot de passe."
+
+#. module: garese_pos
+#. odoo-python
+#: code:addons/garese_pos/models/pos_config.py:0
+#, python-format
+msgid ""
+"The payment numpad has exactly three '+' keys: enter three increments, or "
+"leave the field empty."
+msgstr ""
+"Le pavé de paiement a exactement trois touches « + » : saisissez trois "
+"incréments, ou laissez le champ vide."
+
+#. module: garese_pos
+#: model:ir.model.constraint,message:garese_pos.constraint_pos_config_gp_popular_days_positive
+msgid "The popularity period cannot be negative."
+msgstr "La période de popularité ne peut pas être négative."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen_patch.js:0
+#, python-format
+msgid "The receipt could not be shared."
+msgstr "Le reçu n'a pas pu être partagé."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/cashier_control/manager_auth_popup.js:0
+#, python-format
+msgid "The server cannot be reached. Check the network."
+msgstr "Le serveur est inaccessible. Vérifiez le réseau."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid ""
+"The session has been opened for an unusually long period. Please consider "
+"closing."
+msgstr ""
+"La session est ouverte depuis une durée inhabituelle. Pensez à la fermer."
+
+#. module: garese_pos
+#: model:ir.model.constraint,message:garese_pos.constraint_pos_config_gp_stock_refresh_positive
+msgid "The stock refresh delay cannot be negative."
+msgstr "Le délai d'actualisation du stock ne peut pas être négatif."
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_pos_config__gp_numpad_increments
+#: model:ir.model.fields,help:garese_pos.field_res_config_settings__pos_gp_numpad_increments
+msgid ""
+"The three '+' keys of the payment numpad, separated by commas. Leave empty "
+"to keep Odoo's +10 / +20 / +50."
+msgstr ""
+"Les trois touches « + » du pavé de paiement, séparées par des virgules. "
+"Laissez vide pour garder les +10 / +20 / +50 d'Odoo."
+
+#. module: garese_pos
+#: model:res.groups,comment:garese_pos.gp_group_pos_cashier_only
+msgid ""
+"The user goes straight to the Point of Sale after login and has no Odoo "
+"menu."
+msgstr ""
+"L'utilisateur arrive directement sur la caisse après connexion et n'a aucun "
+"menu Odoo."
+
+#. module: garese_pos
+#. odoo-python
+#: code:addons/garese_pos/models/pos_dashboard.py:0
+#, python-format
+msgid "This action is not available from the dashboard."
+msgstr "Cette action n'est pas disponible depuis le tableau de bord."
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid ""
+"Tick \"Cash Register Only\" on a user: after login he goes straight to the "
+"register and has no Odoo menu."
+msgstr ""
+"Cochez « Caisse seule » sur un utilisateur : après connexion il arrive "
+"directement sur la caisse et n'a aucun menu Odoo."
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_pos_category__gp_color
+msgid "Tile Color"
+msgstr "Couleur de la tuile"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_pos_category__gp_icon
+msgid "Tile Icon"
+msgstr "Icône de la tuile"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen.xml:0
+#, python-format
+msgid "Till receipt"
+msgstr "Ticket de caisse"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "To Close"
+msgstr "À fermer"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "Today"
+msgstr "Aujourd'hui"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen.xml:0
+#: code:addons/garese_pos/static/src/app/product_screen/product_screen.xml:0
+#, python-format
+msgid "Total"
+msgstr "Total"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen.xml:0
+#, python-format
+msgid "Total price"
+msgstr "Prix total"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen.xml:0
+#, python-format
+msgid "Total to pay"
+msgstr "Total à payer"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen_patch.js:0
+#, python-format
+msgid "Transaction reference - %s"
+msgstr "Référence de transaction - %s"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen_patch.js:0
+#, python-format
+msgid "Transaction reference missing"
+msgstr "Référence de transaction manquante"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Turnover"
+msgstr "Chiffre d'affaires"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen.xml:0
+#, python-format
+msgid "Unit price"
+msgstr "Prix unitaire"
+
+#. module: garese_pos
+#: model:ir.model,name:garese_pos.model_res_users
+msgid "User"
+msgstr "Utilisateur"
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Users"
+msgstr "Utilisateurs"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen.xml:0
+#, python-format
+msgid "Validate payment"
+msgstr "Valider le paiement"
+
+#. module: garese_pos
+#. odoo-python
+#: code:addons/garese_pos/models/pos_dashboard.py:0
+#, python-format
+msgid "Validated"
+msgstr "Validé"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/control_buttons/control_buttons.xml:0
+#: code:addons/garese_pos/static/src/app/control_buttons/control_buttons.xml:0
+#: code:addons/garese_pos/static/src/app/control_buttons/control_buttons.xml:0
+#: model:ir.model.fields,field_description:garese_pos.field_pos_order__gp_waiter_id
+#: model:ir.model.fields,field_description:garese_pos.field_report_pos_order__gp_waiter_id
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_view_pos_order_filter_waiter
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_view_report_pos_order_search_waiter
+#, python-format
+msgid "Waiter"
+msgstr "Serveur(se)"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_pos_config__gp_waiter_required
+#: model:ir.model.fields,field_description:garese_pos.field_res_config_settings__pos_gp_waiter_required
+msgid "Waiter Required"
+msgstr "Serveur(se) obligatoire"
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_pos_order__gp_waiter_id
+msgid ""
+"Waiter who serves the customers of this order (selected in the Point of "
+"Sale)."
+msgstr ""
+"Serveur ou serveuse qui sert les clients de cette commande (sélectionné(e) "
+"dans le point de vente)."
+
+#. module: garese_pos
+#: model:ir.actions.act_window,name:garese_pos.gp_pos_waiter_action
+#: model:ir.ui.menu,name:garese_pos.gp_menu_pos_waiter
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_pos_waiter_view_search
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_pos_waiter_view_tree
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_res_config_settings_view_form
+msgid "Waiters"
+msgstr "Serveurs / Serveuses"
+
+#. module: garese_pos
+#: model:ir.model.fields,field_description:garese_pos.field_pos_config__gp_use_waiter
+#: model:ir.model.fields,field_description:garese_pos.field_res_config_settings__pos_gp_use_waiter
+msgid "Waiters on Orders"
+msgstr "Serveur(se) sur les commandes"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/receipt_screen/receipt_screen.xml:0
+#, python-format
+msgid "Walk-in"
+msgstr "Comptant"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/payment_screen/payment_screen.xml:0
+#: code:addons/garese_pos/static/src/app/product_screen/product_screen.xml:0
+#, python-format
+msgid "Walk-in Customer"
+msgstr "Client comptant"
+
+#. module: garese_pos
+#. odoo-python
+#: code:addons/garese_pos/models/pos_dashboard.py:0
+#, python-format
+msgid "Walk-in customer"
+msgstr "Client comptant"
+
+#. module: garese_pos
+#: model:ir.model.fields,help:garese_pos.field_pos_config__gp_favorite_manager_only
+#: model:ir.model.fields,help:garese_pos.field_res_config_settings__pos_gp_favorite_manager_only
+msgid ""
+"When enabled, only Point of Sale managers can star / unstar products from "
+"the Point of Sale."
+msgstr ""
+"Si activé, seuls les responsables du point de vente peuvent ajouter ou "
+"retirer des favoris depuis le point de vente."
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/app/store/pos_store_patch.js:0
+#, python-format
+msgid "Who serves this order?"
+msgstr "Qui sert cette commande ?"
+
+#. module: garese_pos
+#. odoo-python
+#: code:addons/garese_pos/models/pos_cashier_control.py:0
+#, python-format
+msgid "Wrong password."
+msgstr "Mot de passe incorrect."
+
+#. module: garese_pos
+#: model:ir.model.fields.selection,name:garese_pos.selection__pos_category__gp_color__yellow
+#: model:ir.model.fields.selection,name:garese_pos.selection__pos_payment_method__gp_color__yellow
+msgid "Yellow"
+msgstr "Jaune"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "Yesterday"
+msgstr "Hier"
+
+#. module: garese_pos
+#. odoo-python
+#: code:addons/garese_pos/models/pos_dashboard.py:0
+#, python-format
+msgid "You need to be a Point of Sale user to open the dashboard."
+msgstr ""
+"Vous devez être utilisateur du point de vente pour ouvrir le tableau de "
+"bord."
+
+#. module: garese_pos
+#. odoo-python
+#: code:addons/garese_pos/models/pos_cashier_control.py:0
+#, python-format
+msgid "access to the paid orders"
+msgstr "l'accès aux commandes payées"
+
+#. module: garese_pos
+#. odoo-python
+#: code:addons/garese_pos/models/pos_cashier_control.py:0
+#, python-format
+msgid "closing of the session"
+msgstr "la clôture de la session"
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_pos_category_form_view
+msgid "fa-coffee"
+msgstr "fa-coffee"
+
+#. module: garese_pos
+#: model_terms:ir.ui.view,arch_db:garese_pos.gp_pos_payment_method_view_form
+msgid "fa-mobile"
+msgstr "fa-mobile"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.xml:0
+#, python-format
+msgid "outstanding rescue session"
+msgstr "session de secours en attente"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "vs the day before"
+msgstr "vs la veille"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "vs the previous 30 days"
+msgstr "vs les 30 jours précédents"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "vs the previous 7 days"
+msgstr "vs les 7 jours précédents"
+
+#. module: garese_pos
+#. odoo-javascript
+#: code:addons/garese_pos/static/src/dashboard/dashboard.js:0
+#, python-format
+msgid "vs yesterday"
+msgstr "vs hier"

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="garese_pos.GpCategoryBar">
+        <div class="gp-catbar" t-ref="root">
+            <button type="button" class="gp-cat-tile gp-cat-home" t-att-class="{ active: props.home }"
+                    t-on-click="props.onHome">
+                <i class="fa fa-home gp-cat-icon"/>
+                <span class="gp-cat-name">Home</span>
+            </button>
+            <button type="button" class="gp-cat-tile gp-cat-all"
+                    t-att-class="{ active: !props.home and props.activeId === 0 }"
+                    t-on-click="() => props.onSelect(0)">
+                <i class="fa fa-shopping-cart gp-cat-icon"/>
+                <span class="gp-cat-name">All</span>
+                <span class="gp-cat-count" t-esc="countLabel(props.allCount)"/>
+            </button>
+            <button t-foreach="visibleTiles" t-as="tile" t-key="tile.id" type="button"
+                    t-attf-class="gp-cat-tile gp-cat-{{tile.color}}"
+                    t-att-class="{ active: !props.home and tile.id === props.activeId }"
+                    t-on-click="() => props.onSelect(tile.id)">
+                <img t-if="tile.imageUrl" class="gp-cat-img" t-att-src="tile.imageUrl" alt=""/>
+                <i t-else="" t-attf-class="fa {{tile.icon}} gp-cat-icon"/>
+                <span class="gp-cat-name" t-esc="tile.name"/>
+                <span class="gp-cat-count" t-esc="countLabel(tile.count)"/>
+            </button>
+            <button t-if="hiddenTiles.length" type="button" class="gp-cat-tile gp-cat-more" t-on-click="openMore">
+                <i class="fa fa-ellipsis-h gp-cat-icon"/>
+                <span class="gp-cat-name">More</span>
+            </button>
+        </div>
+    </t>
+
+</templates>
