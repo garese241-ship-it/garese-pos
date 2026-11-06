@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="garese_pos.GpClock">
+        <div class="gp-clock">
+            <span class="gp-clock-icon"><i class="fa fa-clock-o"/></span>
+            <span class="gp-clock-text">
+                <span class="gp-clock-time" t-esc="time"/>
+                <span class="gp-clock-date" t-esc="date"/>
+            </span>
+        </div>
+    </t>
+
+    <t t-name="garese_pos.Navbar" t-inherit="point_of_sale.Navbar" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('pos-topheader')]" position="attributes">
+            <attribute name="t-att-class">{ 'gp-topheader': !ui.isSmall }</attribute>
+        </xpath>
+        <!-- Shop name next to the logo -->
+        <xpath expr="//img[hasclass('pos-logo')]" position="after">
+            <span class="gp-nav-pos">POS</span>
+            <span class="gp-nav-shop" t-att-title="pos.config.name">
+                <i class="fa fa-building-o"/>
+                <span class="gp-nav-shop-name" t-esc="pos.config.name"/>
+            </span>
+        </xpath>
+        <!-- Product search + manual code entry, in the middle of the bar -->
+        <xpath expr="//div[hasclass('pos-rightheader')]" position="before">
+            <div t-if="gpShowSearch" class="gp-nav-search">
+                <Input tModel="gpSearchModel"
+                       class="'gp-nav-search-input'"
+                       placeholder="gpSearchPlaceholder"
+                       icon="{type: 'fa', value: 'fa-search'}"
+                       debounceMillis="300"/>
+                <button t-if="gpShowScan" type="button" class="gp-nav-scan" t-on-click="() => pos.gpEnterCode()"
+                        aria-label="Enter a code" title="Enter a code">
+                    <i class="fa fa-barcode"/>
+                </button>
+            </div>
+        </xpath>
+        <xpath expr="//CashierName" position="before">
+            <GpClock t-if="!ui.isSmall"/>
+        </xpath>
+        <!-- The network status sits between the clock and the cashier -->
+        <xpath expr="//SyncNotification" position="replace"/>
+        <xpath expr="//CashierName" position="before">
+            <SyncNotification/>
+        </xpath>
+        <xpath expr="//li[hasclass('backend-button')]" position="before">
+            <li t-if="!ui.isSmall" class="menu-item navbar-button gp-menu-calculator" t-on-click="() => pos.gpToggleCalculator()">
+                <a class="dropdown-item py-2">
+                    <t t-if="pos.gpShowCalculator">Hide Calculator</t>
+                    <t t-else="">Show Calculator</t>
+                </a>
+            </li>
+        </xpath>
+    </t>
+
+    <t t-name="garese_pos.SyncNotification" t-inherit="point_of_sale.SyncNotification" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('js_connected')]" position="inside">
+            <span class="gp-sync-label">Online</span>
+        </xpath>
+        <xpath expr="//div[hasclass('js_connecting')]" position="inside">
+            <span class="gp-sync-label">Syncing</span>
+        </xpath>
+        <xpath expr="//div[hasclass('js_disconnected')]" position="inside">
+            <span class="gp-sync-label">Offline</span>
+        </xpath>
+        <xpath expr="//div[hasclass('js_error')]" position="inside">
+            <span class="gp-sync-label">Sync error</span>
+        </xpath>
+    </t>
+
+    <t t-name="garese_pos.CashierName" t-inherit="point_of_sale.CashierName" t-inherit-mode="extension">
+        <xpath expr="//span[hasclass('username')]" position="after">
+            <span t-if="!ui.isSmall" class="gp-cashier-role" t-esc="gpRole"/>
+        </xpath>
+    </t>
+
+</templates>
