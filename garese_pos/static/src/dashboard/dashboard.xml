@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="garese_pos.Dashboard">
+        <div class="o_action gp-dash">
+            <div class="gp-dash-scroll">
+                <t t-if="state.loading or !state.data">
+                    <div class="gp-dash-loading"><i class="fa fa-circle-o-notch fa-spin"/> Loading</div>
+                </t>
+                <t t-else="">
+                    <t t-set="data" t-value="state.data"/>
+
+                    <!-- Title bar -->
+                    <header class="gp-dash-head">
+                        <div class="gp-dash-title">
+                            <h1>Point of Sale</h1>
+                            <span>Dashboard</span>
+                        </div>
+                        <div class="gp-dash-tools">
+                            <label class="gp-dash-select">
+                                <i class="fa fa-building-o"/>
+                                <select t-on-change="onChangeConfig" aria-label="Cash desk">
+                                    <option value="0" t-att-selected="!state.configId">All cash desks</option>
+                                    <t t-foreach="data.configs" t-as="config" t-key="config.id">
+                                        <option t-att-value="config.id" t-att-selected="state.configId === config.id" t-esc="config.name"/>
+                                    </t>
+                                </select>
+                            </label>
+                            <div t-if="data.is_manager" class="gp-dash-periods" role="group">
+                                <t t-foreach="periods" t-as="period" t-key="period.id">
+                                    <button type="button" t-att-class="{ active: state.period === period.id }"
+                                            t-on-click="() => this.onChangePeriod(period.id)" t-esc="period.label"/>
+                                </t>
+                            </div>
+                            <div class="gp-dash-clock">
+                                <i class="fa fa-calendar-o"/>
+                                <span>
+                                    <b t-esc="state.clock.time"/>
+                                    <small t-esc="state.clock.date"/>
+                                </span>
+                            </div>
+                            <button type="button" class="gp-dash-icon" t-on-click="() => this.load()" title="Refresh" aria-label="Refresh">
+                                <i class="fa fa-refresh"/>
+                            </button>
+                        </div>
+                    </header>
+
+                    <!-- KPI -->
+                    <section t-if="data.is_manager" class="gp-dash-kpis">
+                        <t t-foreach="kpis" t-as="kpi" t-key="kpi.key">
+                            <div class="gp-kpi" t-attf-class="gp-kpi-{{kpi.tone}}">
+                                <span class="gp-kpi-icon"><i class="fa" t-att-class="kpi.icon"/></span>
+                                <div class="gp-kpi-body">
+                                    <span class="gp-kpi-label" t-esc="kpi.label"/>
+                                    <strong class="gp-kpi-value" t-esc="kpi.value"/>
+                                    <span class="gp-kpi-foot">
+                                        <span t-if="kpi.delta !== null" class="gp-kpi-delta" t-att-class="{ down: !kpi.up }">
+                                            <i class="fa" t-att-class="kpi.up ? 'fa-arrow-up' : 'fa-arrow-down'"/>
+                                            <t t-esc="kpi.deltaText"/>
+                                        </span>
+                                        <span class="gp-kpi-versus"><t t-esc="versus"/> (<t t-esc="kpi.previous"/>)</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </t>
+                    </section>
+
+                    <!-- Registers -->
+                    <section class="gp-card gp-registers">
+                        <h2><i class="fa fa-desktop"/> Cash desks</h2>
+                        <div class="gp-reg-grid">
+                            <t t-foreach="data.registers" t-as="register" t-key="register.id">
+                                <t t-set="button" t-value="registerButton(register)"/>
+                                <t t-set="status" t-value="registerStatus(register)"/>
+                                <article class="gp-reg">
+                                    <div class="gp-reg-head">
+                                        <span class="gp-reg-dot" t-attf-class="gp-reg-{{status.tone}}" t-att-title="status.text"/>
+                                        <h3 t-esc="register.name"/>
+                                        <div t-if="data.is_manager" class="dropdown gp-reg-menu">
+                                            <button type="button" class="gp-dash-icon" data-bs-toggle="dropdown" aria-label="Menu">
+                                                <i class="fa fa-ellipsis-v"/>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <h6 class="dropdown-header">See</h6>
+                                                <a class="dropdown-item" href="#" t-on-click.prevent="() => this.openOrders(register)">Orders</a>
+                                                <a class="dropdown-item" href="#" t-on-click.prevent="() => this.openSessions(register)">Sessions</a>
+                                                <h6 class="dropdown-header">Reporting</h6>
+                                                <a class="dropdown-item" href="#" t-on-click.prevent="() => this.openReport(register)">Orders</a>
+                                                <t t-if="data.is_manager">
+                                                    <div class="dropdown-divider"/>
+                                                    <a class="dropdown-item" href="#" t-on-click.prevent="() => this.editRegister(register)">Edit</a>
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="gp-reg-badges">
+                                        <span class="gp-reg-state" t-attf-class="gp-reg-state-{{status.tone}}" t-esc="status.text"/>
+                                        <t t-foreach="registerBadges(register)" t-as="badge" t-key="badge_index">
+                                            <span class="gp-reg-badge" t-attf-class="gp-reg-badge-{{badge.tone}}"
+                                                  t-att-title="badge.title" t-esc="badge.text"/>
+                                        </t>
+                                    </div>
+                                    <dl class="gp-reg-facts">
+                                        <t t-if="data.is_manager">
+                                            <dt>Today</dt>
+                                            <dd><b t-esc="money(register.sales_today)"/></dd>
+                                        </t>
+                                        <t t-if="register.last_session_closing_date">
+                                            <dt>Closing</dt>
+                                            <dd t-esc="register.last_session_closing_date"/>
+                                            <t t-if="register.cash_control">
+                                                <dt>Balance</dt>
+                                                <dd t-esc="money(register.last_session_closing_cash)"/>
+                                            </t>
+                                        </t>
+                                    </dl>
+                                    <a t-if="register.number_of_rescue_session > 0" href="#" class="gp-reg-rescue"
+                                       t-on-click.prevent="() => this.openRescue(register)">
+                                        <t t-esc="register.number_of_rescue_session"/> outstanding rescue session
+                                    </a>
+                                    <div class="gp-reg-foot">
+                                        <button t-if="button" type="button" class="gp-reg-btn" t-att-class="{ secondary: button.secondary }"
+                                                t-on-click="() => this.callRegister(register, button.method)" t-esc="button.label"/>
+                                        <span t-if="register.user_id" class="gp-reg-user" t-att-title="register.user_name">
+                                            <img t-att-src="userImage(register)" alt=""/>
+                                        </span>
+                                    </div>
+                                </article>
+                            </t>
+                            <div t-if="!data.registers.length" class="gp-empty">No cash desk is configured yet.</div>
+                        </div>
+                    </section>
+
+                    <t t-if="data.is_manager">
+                        <!-- Curve + payment methods -->
+                        <div class="gp-dash-row gp-row-main">
+                            <section class="gp-card">
+                                <div class="gp-card-head">
+                                    <h2><i class="fa fa-bar-chart"/> Sales trend</h2>
+                                    <div class="gp-legend">
+                                        <span><i class="gp-dot gp-dot-current"/> Current period</span>
+                                        <span><i class="gp-dot gp-dot-previous"/> Previous period</span>
+                                    </div>
+                                </div>
+                                <div class="gp-chart"><canvas t-ref="line"/></div>
+                            </section>
+                            <section class="gp-card">
+                                <h2><i class="fa fa-credit-card"/> Payment methods</h2>
+                                <div t-if="data.payments.length" class="gp-pay">
+                                    <div class="gp-donut">
+                                        <canvas t-ref="donut"/>
+                                        <div class="gp-donut-center">
+                                            <b t-esc="money(data.kpis.current.turnover)"/>
+                                        </div>
+                                    </div>
+                                    <ul class="gp-pay-list">
+                                        <t t-foreach="data.payments" t-as="method" t-key="method_index">
+                                            <li>
+                                                <i class="gp-dot" t-att-style="'background:' + paymentColor(method, method_index)"/>
+                                                <span class="gp-pay-name" t-esc="method.name"/>
+                                                <span class="gp-pay-share"><t t-esc="number(method.share)"/>%</span>
+                                                <b class="gp-pay-amount" t-esc="money(method.amount)"/>
+                                            </li>
+                                        </t>
+                                    </ul>
+                                </div>
+                                <div t-else="" class="gp-empty">No sale for this period.</div>
+                            </section>
+                        </div>
+
+                        <!-- Categories, best sellers, registers -->
+                        <div class="gp-dash-row gp-row-three">
+                            <section class="gp-card">
+                                <h2><i class="fa fa-pie-chart"/> Sales by category</h2>
+                                <ul class="gp-bars">
+                                    <t t-foreach="data.categories" t-as="category" t-key="category_index">
+                                        <li>
+                                            <span class="gp-bars-name" t-esc="category.name"/>
+                                            <span class="gp-bars-track"><span class="gp-bars-fill" t-att-style="categoryBar(category.share)"/></span>
+                                            <span class="gp-bars-share"><t t-esc="number(category.share)"/>%</span>
+                                            <b class="gp-bars-amount" t-esc="money(category.amount)"/>
+                                        </li>
+                                    </t>
+                                </ul>
+                                <div t-if="!data.categories.length" class="gp-empty">No sale for this period.</div>
+                            </section>
+                            <section class="gp-card">
+                                <h2><i class="fa fa-star"/> Best-selling products</h2>
+                                <ol class="gp-top">
+                                    <t t-foreach="data.top_products" t-as="product" t-key="product.id">
+                                        <li>
+                                            <span class="gp-top-rank" t-esc="product_index + 1"/>
+                                            <img t-att-src="productImage(product)" alt="" loading="lazy"/>
+                                            <span class="gp-top-name" t-esc="product.name"/>
+                                            <span class="gp-top-qty" t-esc="'x' + number(product.qty)"/>
+                                            <b class="gp-top-amount" t-esc="money(product.amount)"/>
+                                        </li>
+                                    </t>
+                                </ol>
+                                <div t-if="!data.top_products.length" class="gp-empty">No sale for this period.</div>
+                            </section>
+                            <section class="gp-card">
+                                <h2><i class="fa fa-desktop"/> Sales by cash desk</h2>
+                                <ul class="gp-bars gp-bars-reg">
+                                    <t t-foreach="data.by_register" t-as="row" t-key="row.id">
+                                        <li>
+                                            <span class="gp-bars-name" t-esc="row.name"/>
+                                            <span class="gp-bars-track"><span class="gp-bars-fill" t-att-style="categoryBar(row.share)"/></span>
+                                            <span class="gp-bars-share"><t t-esc="number(row.share)"/>%</span>
+                                            <b class="gp-bars-amount" t-esc="money(row.amount)"/>
+                                        </li>
+                                    </t>
+                                </ul>
+                            </section>
+                        </div>
+
+                        <!-- Transactions + live activity -->
+                        <div class="gp-dash-row gp-row-bottom">
+                            <section class="gp-card">
+                                <div class="gp-card-head">
+                                    <h2><i class="fa fa-file-text-o"/> Latest transactions</h2>
+                                </div>
+                                <div class="gp-table-wrap">
+                                    <table class="gp-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Sale time</th>
+                                                <th>Receipt No.</th>
+                                                <th>Customer</th>
+                                                <th class="num">Items</th>
+                                                <th class="num">Amount</th>
+                                                <th>Payment</th>
+                                                <th>Cash desk</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="data.transactions" t-as="tx" t-key="tx.id">
+                                                <tr t-on-click="() => this.openTransaction(tx)">
+                                                    <td><t t-esc="tx.time"/> <small t-esc="tx.date"/></td>
+                                                    <td class="gp-ref" t-esc="shortRef(tx.reference)"/>
+                                                    <td t-esc="tx.partner"/>
+                                                    <td class="num" t-esc="number(tx.articles)"/>
+                                                    <td class="num"><b t-esc="money(tx.amount)"/></td>
+                                                    <td t-esc="tx.payments.join(', ')"/>
+                                                    <td t-esc="tx.register"/>
+                                                    <td><span class="gp-status" t-attf-class="gp-status-{{tx.status}}" t-esc="tx.status_label"/></td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                    <div t-if="!data.transactions.length" class="gp-empty">No transaction yet.</div>
+                                </div>
+                            </section>
+                            <section class="gp-card">
+                                <div class="gp-card-head">
+                                    <h2><span class="gp-live" t-att-class="{ paused: state.paused }"/> Live activity</h2>
+                                    <button type="button" class="gp-dash-icon" t-on-click="togglePause"
+                                            t-att-title="pauseLabel" t-att-aria-label="pauseLabel">
+                                        <i class="fa" t-att-class="state.paused ? 'fa-play' : 'fa-pause'"/>
+                                    </button>
+                                </div>
+                                <ul class="gp-feed">
+                                    <t t-foreach="data.activity" t-as="event" t-key="event_index">
+                                        <li t-attf-class="gp-feed-{{event.type}}">
+                                            <span class="gp-feed-time" t-esc="event.time"/>
+                                            <i class="fa" t-att-class="activityIcon(event)"/>
+                                            <span class="gp-feed-text" t-esc="activityText(event)"/>
+                                        </li>
+                                    </t>
+                                </ul>
+                                <div t-if="!data.activity.length" class="gp-empty">No activity yet.</div>
+                            </section>
+                        </div>
+                    </t>
+                </t>
+            </div>
+        </div>
+    </t>
+
+</templates>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="gp_product_template_form_view" model="ir.ui.view">
+        <field name="name">product.template.form.garese.pos</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="point_of_sale.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <field name="pos_categ_ids" position="after">
+                <field name="gp_pos_favorite" invisible="not available_in_pos"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="gp_product_template_search_view" model="ir.ui.view">
+        <field name="name">product.template.search.garese.pos</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="point_of_sale.product_template_search_view_pos"/>
+        <field name="arch" type="xml">
+            <filter name="filter_to_availabe_pos" position="after">
+                <filter name="gp_filter_pos_favorite" string="POS Favorites"
+                        domain="[('gp_pos_favorite', '=', True)]"/>
+            </filter>
+        </field>
+    </record>
+</odoo>

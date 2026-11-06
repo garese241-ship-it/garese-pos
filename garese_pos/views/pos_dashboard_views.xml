@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_gp_dashboard" model="ir.actions.client">
+        <field name="name">GARESE POS Dashboard</field>
+        <field name="tag">garese_pos.dashboard</field>
+    </record>
+
+    <!-- The standard "Dashboard" menu now opens the GARESE dashboard. -->
+    <record id="point_of_sale.menu_pos_dashboard" model="ir.ui.menu">
+        <field name="action" eval="'ir.actions.client,%d' % ref('garese_pos.action_gp_dashboard')"/>
+    </record>
+
+    <!-- The standard card view stays available. -->
+    <menuitem id="menu_gp_classic_dashboard"
+              name="Classic Dashboard"
+              action="point_of_sale.action_pos_config_kanban"
+              parent="point_of_sale.menu_point_root"
+              sequence="2"/>
+</odoo>

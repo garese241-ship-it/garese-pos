@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="garese_pos.ProductsWidget" t-inherit="point_of_sale.ProductsWidget" t-inherit-mode="extension">
+
+        <xpath expr="//div[hasclass('products-widget')]" position="attributes">
+            <attribute name="t-att-class">{ 'gp-products': !ui.isSmall }</attribute>
+        </xpath>
+
+        <!-- Standard category breadcrumb + search: kept for small screens only.
+             On large screens the search lives in the top bar. -->
+        <xpath expr="//div[hasclass('products-widget-control')]" position="attributes">
+            <attribute name="t-if">ui.isSmall</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('products-widget-control')]" position="after">
+            <t t-if="!ui.isSmall">
+                <GpCategoryBar
+                    tiles="gpCategoryTiles"
+                    activeId="gpActiveRootId"
+                    home="pos.gpHome"
+                    allCount="gpCategoryCount(pos.db.root_category_id)"
+                    onHome="() => this.pos.gpGoHome()"
+                    onSelect="(id) => this.pos.setSelectedCategoryId(id)"/>
+                <t t-set="gpSub" t-value="gpSubCategories"/>
+                <div t-if="gpSub" class="gp-subcats">
+                    <t t-foreach="gpSub.path" t-as="cat" t-key="cat.id">
+                        <i t-if="!cat_first" class="fa fa-angle-right gp-subcat-sep"/>
+                        <button type="button" class="gp-chip gp-chip-path"
+                                t-att-class="{ active: cat.id === gpSub.selected }"
+                                t-on-click="() => this.pos.setSelectedCategoryId(cat.id)" t-esc="cat.name"/>
+                    </t>
+                    <span t-if="gpSub.children.length" class="gp-subcat-divider"/>
+                    <button t-foreach="gpSub.children" t-as="cat" t-key="cat.id" type="button" class="gp-chip"
+                            t-att-class="{ active: cat.id === gpSub.selected }"
+                            t-on-click="() => this.pos.setSelectedCategoryId(cat.id)" t-esc="cat.name"/>
+                </div>
+            </t>
+        </xpath>
+
+        <xpath expr="//div[hasclass('product-list-container')]" position="attributes">
+            <attribute name="t-att-class">{ 'gp-view-list': !ui.isSmall and pos.gpViewMode === 'list' }</attribute>
+        </xpath>
+
+        <!-- Must come before the best sellers section below adds a second ProductCard. -->
+        <xpath expr="//ProductCard" position="attributes">
+            <attribute name="gp">gpCardData(product)</attribute>
+        </xpath>
+
+        <!-- Title, quick filters, sort and view switch + best sellers section.
+             The standard list carries its class through t-attf-class, which an
+             xpath cannot match: anchor on the ProductCard it contains. -->
+        <xpath expr="//div[hasclass('product-list-container')]/div[t/ProductCard]" position="before">
+            <t t-if="!ui.isSmall">
+                <div class="gp-toolbar">
+                    <h2 class="gp-toolbar-title">
+                        <i t-if="gpShowSections" class="fa fa-fire"/>
+                        <t t-esc="gpListTitle"/>
+                    </h2>
+                    <div class="gp-toolbar-filters">
+                        <button t-foreach="gpFilters" t-as="f" t-key="f.key" type="button"
+                                t-attf-class="gp-chip gp-filter gp-filter-{{f.key}}"
+                                t-att-class="{ active: pos.gpFilter === f.key }"
+                                t-on-click="() => this.pos.gpSetFilter(f.key)">
+                            <i t-if="f.icon" t-attf-class="fa {{f.icon}}"/>
+                            <t t-esc="f.label"/>
+                        </button>
+                    </div>
+                    <div class="gp-toolbar-tools">
+                        <button type="button" class="gp-tool gp-tool-sort"
+                                t-att-class="{ active: pos.gpSort !== 'default' }"
+                                t-on-click="gpOpenSort" aria-label="Sort products" title="Sort products">
+                            <i class="fa fa-sliders"/>
+                        </button>
+                        <button type="button" class="gp-tool gp-tool-grid"
+                                t-att-class="{ active: pos.gpViewMode !== 'list' }"
+                                t-on-click="() => this.pos.gpSetViewMode('grid')" aria-label="Grid view" title="Grid view">
+                            <i class="fa fa-th-large"/>
+                        </button>
+                        <button type="button" class="gp-tool gp-tool-list"
+                                t-att-class="{ active: pos.gpViewMode === 'list' }"
+                                t-on-click="() => this.pos.gpSetViewMode('list')" aria-label="List view" title="List view">
+                            <i class="fa fa-list-ul"/>
+                        </button>
+                    </div>
+                </div>
+                <t t-if="gpShowSections">
+                    <div class="product-list gp-popular-list d-grid gap-1 p-1">
+                        <t t-foreach="gpPopularToDisplay" t-as="product" t-key="product.id">
+                            <ProductCard
+                                class="pos.productViewMode"
+                                name="product.display_name"
+                                productId="product.id"
+                                price="product.getFormattedUnitPrice()"
+                                imageUrl="pos.show_product_images and product.getImageUrl()"
+                                onClick="() => this.pos.addProductToCurrentOrder(product)"
+                                productInfo="true"
+                                onProductInfoClick="() => this.onProductInfoClick(product)"
+                                gp="gpCardData(product)"
+                            />
+                        </t>
+                    </div>
+                    <h2 t-if="productsToDisplay.length" class="gp-section-title">Other products</h2>
+                </t>
+            </t>
+        </xpath>
+
+        <!-- When the best sellers fill the screen, an empty "other products"
+             list is not an empty category. -->
+        <xpath expr="//div[hasclass('product-list-empty')]" position="attributes">
+            <attribute name="t-else"/>
+            <attribute name="t-elif">!gpShowSections</attribute>
+        </xpath>
+
+        <xpath expr="//div[hasclass('search-more-button')]" position="before">
+            <div t-if="!ui.isSmall and gpHasMoreProducts" class="gp-show-more">
+                <button type="button" class="btn btn-light" t-on-click="() => this.pos.gpShowMoreProducts()">
+                    Show more products
+                </button>
+            </div>
+        </xpath>
+    </t>
+
+    <!-- ============================================================== -->
+    <!-- Product card: only when the list provides `props.gp`            -->
+    <!-- ============================================================== -->
+    <t t-name="garese_pos.ProductCard" t-inherit="point_of_sale.ProductCard" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('product-content')]" position="before">
+            <t t-if="props.gp">
+                <span t-if="props.gp.popular" class="gp-card-popular" title="Popular product">
+                    <i class="fa fa-fire" role="img" aria-label="Popular product"/>
+                </span>
+                <button t-if="props.gp.canFavorite or props.gp.favorite" type="button" class="gp-card-fav"
+                        t-att-class="{ active: props.gp.favorite, 'gp-readonly': !props.gp.canFavorite }"
+                        t-on-click.stop="props.gp.onToggleFavorite"
+                        aria-label="Favorite" title="Favorite">
+                    <i t-attf-class="fa {{ props.gp.favorite ? 'fa-star' : 'fa-star-o' }}"/>
+                </button>
+                <div t-if="props.gp.placeholder" class="product-img gp-card-noimg">
+                    <i class="fa fa-cube"/>
+                </div>
+            </t>
+        </xpath>
+        <xpath expr="//div[hasclass('product-content')]" position="inside">
+            <div t-if="props.gp" class="gp-card-footer">
+                <span t-if="props.gp.stockLabel" t-attf-class="gp-stock gp-stock-{{props.gp.stockState}}"
+                      t-esc="props.gp.stockLabel"/>
+                <span class="gp-card-add" aria-hidden="true"><i class="fa fa-plus"/></span>
+            </div>
+        </xpath>
+    </t>
+
+</templates>

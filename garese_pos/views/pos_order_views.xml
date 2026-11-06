@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="gp_view_pos_pos_form" model="ir.ui.view">
+        <field name="name">pos.order.form.garese.pos</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="gp_waiter_id" readonly="state in ['done', 'invoiced']" options="{'no_create': True}"/>
+            </xpath>
+            <field name="note" position="before">
+                <group string="Customer Note" invisible="not gp_note">
+                    <field name="gp_note" nolabel="1" colspan="2" readonly="1"/>
+                </group>
+            </field>
+        </field>
+    </record>
+</odoo>
