@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="gp_brand_view_form" model="ir.ui.view">
+        <field name="name">gp.brand.form</field>
+        <field name="model">gp.brand</field>
+        <field name="arch" type="xml">
+            <form string="Brand">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_products" type="object" class="oe_stat_button" icon="fa-tags">
+                            <field name="product_count" widget="statinfo" string="Products"/>
+                        </button>
+                    </div>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    <field name="active" invisible="1"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="e.g. Nike"/></h1>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="gp_brand_view_tree" model="ir.ui.view">
+        <field name="name">gp.brand.tree</field>
+        <field name="model">gp.brand</field>
+        <field name="arch" type="xml">
+            <list string="Brands" sample="1">
+                <field name="name"/>
+                <field name="product_count"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="gp_brand_view_search" model="ir.ui.view">
+        <field name="name">gp.brand.search</field>
+        <field name="model">gp.brand</field>
+        <field name="arch" type="xml">
+            <search string="Brands">
+                <field name="name"/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="gp_brand_action" model="ir.actions.act_window">
+        <field name="name">Brands</field>
+        <field name="res_model">gp.brand</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Add the brands of your products</p>
+            <p>Pick the brand on the product form: it is shown on the Point of Sale cards and you can search the products by brand.</p>
+        </field>
+    </record>
+
+    <menuitem id="gp_menu_brand" name="Brands" parent="point_of_sale.menu_point_config_product"
+              action="gp_brand_action" sequence="13" groups="garese_pos.gp_group_brand"/>
+</odoo>

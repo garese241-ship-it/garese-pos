@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="gp_res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.garese.pos</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="point_of_sale.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <!-- Anchored on the app itself: block ids change between Odoo versions. -->
+            <xpath expr="//app[@name='point_of_sale']" position="inside">
+                <block title="GARESE POS" id="gp_garese_pos_section">
+                    <setting string="Stock on Products"
+                             help="Show the quantity left on each product of the Point of Sale.">
+                        <field name="pos_gp_show_stock"/>
+                        <div class="content-group mt16" invisible="not pos_gp_show_stock">
+                            <div class="row">
+                                <label for="pos_gp_low_stock_threshold" string="Low stock at" class="col-lg-5 o_light_label"/>
+                                <field name="pos_gp_low_stock_threshold" class="col-lg-3"/>
+                            </div>
+                            <div class="row">
+                                <label for="pos_gp_stock_refresh_minutes" string="Refresh every (min)" class="col-lg-5 o_light_label"/>
+                                <field name="pos_gp_stock_refresh_minutes" class="col-lg-3"/>
+                            </div>
+                        </div>
+                    </setting>
+                    <setting string="Popular Products"
+                             help="Best sellers of this Point of Sale, shown first on the home view.">
+                        <div class="content-group mt16">
+                            <div class="row">
+                                <label for="pos_gp_popular_limit" string="Number of products" class="col-lg-5 o_light_label"/>
+                                <field name="pos_gp_popular_limit" class="col-lg-3"/>
+                            </div>
+                            <div class="row">
+                                <label for="pos_gp_popular_days" string="Over the last (days)" class="col-lg-5 o_light_label"/>
+                                <field name="pos_gp_popular_days" class="col-lg-3"/>
+                            </div>
+                        </div>
+                    </setting>
+                    <setting string="Payment Screen"
+                             help="One-tap amounts and '+' keys of the payment numpad, separated by commas.">
+                        <div class="content-group mt16">
+                            <div class="row">
+                                <label for="pos_gp_quick_amounts" string="Quick amounts" class="col-lg-4 o_light_label"/>
+                                <field name="pos_gp_quick_amounts" class="col-lg-8" placeholder="5000, 10000, 20000"/>
+                            </div>
+                            <div class="row">
+                                <label for="pos_gp_numpad_increments" string="Numpad '+' keys" class="col-lg-4 o_light_label"/>
+                                <field name="pos_gp_numpad_increments" class="col-lg-8" placeholder="10000, 20000, 50000"/>
+                            </div>
+                        </div>
+                    </setting>
+                    <setting string="Bag Button"
+                             help="Product added to the order when the cashier taps the Bag button.">
+                        <field name="pos_gp_bag_product_id" placeholder="No bag product"/>
+                    </setting>
+                    <setting string="Waiters"
+                             help="The cashier selects the waiter who serves the customers of each order. Printed on the receipt, available in the orders and in the sales analysis.">
+                        <field name="pos_gp_use_waiter"/>
+                        <div class="content-group mt16" invisible="not pos_gp_use_waiter">
+                            <div class="row">
+                                <field name="pos_gp_waiter_required" class="col-lg-1 ml16"/>
+                                <label for="pos_gp_waiter_required" string="Required before payment" class="col-lg-10 o_light_label"/>
+                            </div>
+                            <div class="mt8">
+                                <button name="%(garese_pos.gp_pos_waiter_action)d" type="action" class="btn-link"
+                                        icon="oi-arrow-right" string="Waiters"/>
+                            </div>
+                        </div>
+                    </setting>
+                    <setting string="Taxes on the Receipt"
+                             help="Print the tax line on the receipt. When disabled, the receipt shows tax-included amounts only.">
+                        <field name="pos_gp_receipt_show_tax"/>
+                    </setting>
+                    <setting string="Promotions First"
+                             help="Products on promotion (pricelist price below the public price, valid for the pricelist dates) come first on the home view, with the discount and the old price.">
+                        <field name="pos_gp_promo_first"/>
+                    </setting>
+                    <setting string="Receipt Text Size"
+                             help="Size of the text on the receipts, bills and preparation tickets.">
+                        <field name="pos_gp_receipt_font" widget="radio" options="{'horizontal': true}"/>
+                    </setting>
+                    <setting string="Product Brands"
+                             help="Adds the Brand field on the products and the list of brands (Point of Sale > Configuration > Brands).">
+                        <field name="group_gp_brand"/>
+                        <div class="content-group mt16" invisible="not group_gp_brand">
+                            <field name="pos_gp_show_brand"/>
+                            <label for="pos_gp_show_brand" string="Show the brand in this Point of Sale" class="o_light_label"/>
+                        </div>
+                    </setting>
+                    <setting string="Screen Ambiance"
+                             help="Brightness of the Point of Sale screens. Soft and Dimmed replace the white backgrounds with a calm, less luminous tone.">
+                        <field name="pos_gp_ambiance" widget="radio" options="{'horizontal': true}"/>
+                    </setting>
+                    <setting string="Favorites Reserved to Managers"
+                             help="Cashiers can use the Favorites filter but cannot star or unstar products.">
+                        <field name="pos_gp_favorite_manager_only"/>
+                    </setting>
+                </block>
+                <block title="Interactive Point of Sale" id="gp_interactive_section">
+                    <setting string="Animations"
+                             help="The product flies to the cart when added, the counters pulse and the payment confirmation is animated.">
+                        <field name="pos_gp_fx_animations"/>
+                    </setting>
+                    <setting string="Sounds"
+                             help="Soft sounds when a product is added, when a payment succeeds and on errors.">
+                        <field name="pos_gp_fx_sounds"/>
+                    </setting>
+                    <setting string="Often Bought Together"
+                             help="After a product is added, suggest the products most often sold in the same order (last 90 days of this Point of Sale).">
+                        <field name="pos_gp_suggestions"/>
+                    </setting>
+                    <setting string="Customer Card"
+                             help="Quick card of the selected customer: total spent, last visit, favorite products, VIP and birthday flags, reward progress.">
+                        <field name="pos_gp_customer_card"/>
+                        <div class="content-group mt16" invisible="not pos_gp_customer_card">
+                            <div class="row">
+                                <label for="pos_gp_vip_threshold" string="VIP from (amount spent)" class="col-lg-5 o_light_label"/>
+                                <field name="pos_gp_vip_threshold" class="col-lg-3"/>
+                            </div>
+                            <div class="row">
+                                <label for="pos_gp_loyalty_every" string="Reward every (purchases)" class="col-lg-5 o_light_label"/>
+                                <field name="pos_gp_loyalty_every" class="col-lg-3"/>
+                            </div>
+                            <div class="row">
+                                <label for="pos_gp_loyalty_reward" string="Reward" class="col-lg-5 o_light_label"/>
+                                <field name="pos_gp_loyalty_reward" class="col-lg-5"/>
+                            </div>
+                        </div>
+                    </setting>
+                    <setting string="Daily Goal"
+                             help="Sales target of the day for this Point of Sale, shown as a progress bar on the home view. 0 hides it.">
+                        <field name="pos_gp_daily_goal"/>
+                    </setting>
+                    <setting string="Color Theme"
+                             help="Main color of the Point of Sale screens.">
+                        <field name="pos_gp_theme" widget="radio" options="{'horizontal': true}"/>
+                    </setting>
+                    <setting string="Product Tile Size"
+                             help="Compact shows more products, large is easier to touch.">
+                        <field name="pos_gp_tile_size" widget="radio" options="{'horizontal': true}"/>
+                    </setting>
+                    <setting string="Navbar Logo"
+                             help="Logo shown in the top bar of this Point of Sale instead of its name.">
+                        <field name="pos_gp_logo" widget="image" options="{'size': [128, 48]}"/>
+                    </setting>
+                </block>
+                <block title="Cashier Restrictions" id="gp_cashier_restrictions">
+                    <setting string="Closing Authorized by a Manager"
+                             help="The cashier needs the Odoo password of a Point of Sale manager to close the session. The manager is recorded on the session.">
+                        <field name="pos_gp_close_requires_manager"/>
+                    </setting>
+                    <setting string="Hide Paid Orders from Cashiers"
+                             help="Cashiers see their ongoing orders and the paid orders of the current session (reprint); earlier paid orders are hidden.">
+                        <field name="pos_gp_hide_paid_orders"/>
+                    </setting>
+                    <setting string="Hide Totals from Cashiers"
+                             help="At closing, cashiers only count the cash: no expected amounts, differences or sales report.">
+                        <field name="pos_gp_hide_closing_totals"/>
+                    </setting>
+                    <setting string="Cashiers Without Back-Office"
+                             help="Tick &quot;Cash Register Only&quot; on a user: after login he goes straight to the register and has no Odoo menu.">
+                        <div class="mt8">
+                            <button name="base.action_res_users" type="action" class="btn-link"
+                                    icon="oi-arrow-right" string="Users"/>
+                        </div>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="garese_pos.GpProductCard">
+        <article tabindex="0" role="button"
+                 class="product gp-card position-relative"
+                 t-att-class="{ 'gp-card-out': stockState === 'out' }"
+                 t-att-data-product-id="product.id"
+                 t-on-click="() => props.onAdd(product)"
+                 t-on-keypress="(ev) => (ev.code === 'Space' or ev.code === 'Enter') and props.onAdd(product)">
+            <span t-if="promo" class="gp-card-promo" title="Promotion">-<t t-esc="promo.percent"/>%</span>
+            <span t-if="popular and !promo" class="gp-card-popular" title="Popular product">
+                <i class="fa fa-fire" role="img" aria-label="Popular product"/>
+            </span>
+            <button t-if="pos.gpCanEditFavorites or favorite" type="button" class="gp-card-fav"
+                    t-att-class="{ active: favorite, 'gp-readonly': !pos.gpCanEditFavorites }"
+                    t-on-click.stop="toggleFavorite" aria-label="Favorite" title="Favorite">
+                <i t-attf-class="fa {{ favorite ? 'fa-star' : 'fa-star-o' }}"/>
+            </button>
+            <button t-if="props.onInfo" type="button" class="gp-card-info product-information-tag"
+                    t-on-click.stop="() => props.onInfo(product)" aria-label="Product information" title="Product information">
+                <i class="fa fa-info"/>
+            </button>
+            <div t-if="imageUrl" class="product-img">
+                <img t-att-src="imageUrl" t-att-alt="product.display_name" draggable="false"/>
+            </div>
+            <div t-elif="showPlaceholder" class="product-img gp-card-noimg">
+                <i class="fa fa-cube"/>
+            </div>
+            <div class="product-content">
+                <div t-if="pos.config.gp_show_brand" class="gp-card-brand" t-esc="brand or ' '"/>
+                <div class="product-name" t-esc="product.display_name"/>
+                <span class="price-tag" t-att-class="{ 'gp-price-promo': promo }">
+                    <span t-if="promo" class="gp-old-price" t-esc="promo.oldPrice"/>
+                    <span class="gp-price" t-esc="price"/>
+                </span>
+                <div class="gp-card-footer">
+                    <span t-if="stockLabel" t-attf-class="gp-stock gp-stock-{{stockState}}" t-esc="stockLabel"/>
+                    <span class="gp-card-add" aria-hidden="true"><i class="fa fa-plus"/></span>
+                </div>
+            </div>
+            <span t-if="cartQty" class="gp-card-qty" t-esc="cartQty"/>
+        </article>
+    </t>
+
+    <t t-name="garese_pos.GpCategoryBar">
+        <div class="gp-catbar" t-ref="root">
+            <button type="button" class="gp-cat-tile gp-cat-home" t-att-class="{ active: pos.gpHome and !pos.searchProductWord }"
+                    t-on-click="() => pos.gpGoHome()">
+                <i class="fa fa-home gp-cat-icon"/>
+                <span class="gp-cat-name">Home</span>
+            </button>
+            <button type="button" class="gp-cat-tile gp-cat-all"
+                    t-att-class="{ active: !pos.gpHome and activeRootId === 0 }"
+                    t-on-click="() => pos.gpShowAll()">
+                <i class="fa fa-shopping-cart gp-cat-icon"/>
+                <span class="gp-cat-name">All</span>
+                <span class="gp-cat-count" t-esc="countLabel(allCount)"/>
+            </button>
+            <button t-foreach="visibleTiles" t-as="tile" t-key="tile.id" type="button"
+                    t-attf-class="gp-cat-tile gp-cat-{{tile.color}}"
+                    t-att-class="{ active: !pos.gpHome and tile.id === activeRootId }"
+                    t-on-click="() => this.selectCategory(tile.id)">
+                <img t-if="tile.imageUrl" class="gp-cat-img" t-att-src="tile.imageUrl" alt=""/>
+                <i t-else="" t-attf-class="fa {{tile.icon}} gp-cat-icon"/>
+                <span class="gp-cat-name" t-esc="tile.name"/>
+                <span class="gp-cat-count" t-esc="countLabel(tile.count)"/>
+            </button>
+            <button t-if="hiddenTiles.length" type="button" class="gp-cat-tile gp-cat-more" t-on-click="openMore">
+                <i class="fa fa-ellipsis-h gp-cat-icon"/>
+                <span class="gp-cat-name">More</span>
+            </button>
+        </div>
+    </t>
+
+    <t t-name="garese_pos.GpCatalog">
+        <div class="gp-products d-flex flex-column flex-grow-1 overflow-hidden">
+            <GpCategoryBar/>
+            <t t-set="goalData" t-value="goal"/>
+            <div t-if="goalData" class="gp-goal" t-att-class="{ 'gp-goal-reached': goalData.reached }">
+                <span class="gp-goal-label">
+                    <i t-attf-class="fa {{ goalData.reached ? 'fa-trophy' : 'fa-bullseye' }}"/>
+                    Daily goal
+                </span>
+                <div class="gp-goal-bar"><span t-attf-style="width: {{ goalData.percent }}%"/></div>
+                <span class="gp-goal-figures">
+                    <b t-esc="goalData.amount"/> / <t t-esc="goalData.target"/>
+                    <span t-if="goalData.reached" class="gp-goal-msg">Goal reached!</span>
+                    <span t-else="" class="gp-goal-msg"><t t-esc="goalData.left"/> remaining</span>
+                </span>
+            </div>
+            <t t-set="sub" t-value="subCategories"/>
+            <div t-if="sub" class="gp-subcats">
+                <t t-foreach="sub.path" t-as="cat" t-key="cat.id">
+                    <i t-if="!cat_first" class="fa fa-angle-right gp-subcat-sep"/>
+                    <button type="button" class="gp-chip gp-chip-path"
+                            t-att-class="{ active: cat.id === sub.selected }"
+                            t-on-click="() => this.pos.setSelectedCategory(cat.id)" t-esc="cat.name"/>
+                </t>
+                <span t-if="sub.children.length" class="gp-subcat-divider"/>
+                <button t-foreach="sub.children" t-as="cat" t-key="cat.id" type="button" class="gp-chip"
+                        t-att-class="{ active: cat.id === sub.selected }"
+                        t-on-click="() => this.pos.setSelectedCategory(cat.id)" t-esc="cat.name"/>
+            </div>
+
+            <div class="product-list-container gp-list-scroll flex-grow-1 overflow-y-auto"
+                 t-att-class="{ 'gp-view-list': pos.gpViewMode === 'list' }">
+                <div class="gp-toolbar">
+                    <h2 class="gp-toolbar-title">
+                        <i t-if="promoToDisplay.length" class="fa fa-tag gp-promo-icon"/>
+                        <i t-elif="showSections" class="fa fa-fire"/>
+                        <t t-esc="listTitle"/>
+                    </h2>
+                    <div class="gp-toolbar-filters">
+                        <button t-foreach="filters" t-as="f" t-key="f.key" type="button"
+                                t-attf-class="gp-chip gp-filter gp-filter-{{f.key}}"
+                                t-att-class="{ active: pos.gpFilter === f.key }"
+                                t-on-click="() => this.pos.gpSetFilter(f.key)">
+                            <i t-if="f.icon" t-attf-class="fa {{f.icon}}"/>
+                            <t t-esc="f.label"/>
+                        </button>
+                    </div>
+                    <div class="gp-toolbar-tools">
+                        <button type="button" class="gp-tool gp-tool-sort"
+                                t-att-class="{ active: pos.gpSort !== 'default' }"
+                                t-on-click="openSort" aria-label="Sort products" title="Sort products">
+                            <i class="fa fa-sliders"/>
+                        </button>
+                        <button type="button" class="gp-tool gp-tool-grid"
+                                t-att-class="{ active: pos.gpViewMode !== 'list' }"
+                                t-on-click="() => this.pos.gpSetViewMode('grid')" aria-label="Grid view" title="Grid view">
+                            <i class="fa fa-th-large"/>
+                        </button>
+                        <button type="button" class="gp-tool gp-tool-list"
+                                t-att-class="{ active: pos.gpViewMode === 'list' }"
+                                t-on-click="() => this.pos.gpSetViewMode('list')" aria-label="List view" title="List view">
+                            <i class="fa fa-list-ul"/>
+                        </button>
+                    </div>
+                </div>
+                <t t-if="showSections">
+                    <div t-if="promoToDisplay.length" class="product-list gp-grid gp-promo-list">
+                        <GpProductCard t-foreach="promoToDisplay" t-as="product" t-key="product.id"
+                                       product="product" onAdd="props.onAdd" onInfo="(p) => this.onInfo(p)"
+                                       cartQty="qtyOf(product)"/>
+                    </div>
+                    <h2 t-if="promoToDisplay.length and popularToDisplay.length" class="gp-section-title">
+                        <i class="fa fa-fire"/>Popular products
+                    </h2>
+                    <div t-if="popularToDisplay.length" class="product-list gp-grid gp-popular-list">
+                        <GpProductCard t-foreach="popularToDisplay" t-as="product" t-key="product.id"
+                                       product="product" onAdd="props.onAdd" onInfo="(p) => this.onInfo(p)"
+                                       cartQty="qtyOf(product)"/>
+                    </div>
+                    <h2 t-if="productsToDisplay.length" class="gp-section-title">Other products</h2>
+                </t>
+                <div t-if="productsToDisplay.length" class="product-list gp-grid">
+                    <GpProductCard t-foreach="productsToDisplay" t-as="product" t-key="product.id"
+                                   product="product" onAdd="props.onAdd" onInfo="(p) => this.onInfo(p)"
+                                   cartQty="qtyOf(product)"/>
+                </div>
+                <div t-elif="!showSections" class="gp-empty">
+                    <i class="fa fa-search"/>
+                    <p t-if="searchWord">No products found for <b>"<t t-esc="searchWord"/>"</b>.</p>
+                    <p t-else="">There are no products here.</p>
+                </div>
+                <div t-if="hasMoreProducts" class="gp-show-more">
+                    <button type="button" class="btn btn-light" t-on-click="() => this.pos.gpShowMoreProducts()">
+                        Show more products
+                    </button>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

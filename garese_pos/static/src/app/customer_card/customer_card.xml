@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="garese_pos.GpCustomerCard">
+        <div t-if="card" class="gp-ccard" t-att-class="{ 'gp-ccard-vip': isVip, 'gp-ccard-open': state.open }">
+            <button type="button" class="gp-ccard-head" t-on-click="toggle">
+                <span class="gp-ccard-avatar"><i class="fa fa-user"/></span>
+                <span class="gp-ccard-main">
+                    <span class="gp-ccard-name" t-esc="props.partner.name"/>
+                    <span class="gp-ccard-meta">
+                        <t t-esc="visitsLabel"/> · <t t-esc="spent"/>
+                        <t t-if="lastVisitLabel"> · <t t-esc="lastVisitLabel"/></t>
+                    </span>
+                </span>
+                <span t-if="isVip" class="gp-ccard-badge gp-ccard-badge-vip"><i class="fa fa-star"/> VIP</span>
+                <span t-if="birthdayLabel" class="gp-ccard-badge gp-ccard-badge-bday">
+                    <i class="fa fa-birthday-cake"/> <t t-esc="birthdayLabel"/>
+                </span>
+                <i t-attf-class="fa {{ state.open ? 'fa-chevron-up' : 'fa-chevron-down' }} gp-ccard-caret"/>
+            </button>
+            <div t-if="loyalty" class="gp-ccard-loyalty" t-att-class="{ 'gp-ccard-ready': loyalty.ready }">
+                <div class="gp-ccard-bar"><span t-attf-style="width: {{ loyalty.percent }}%"/></div>
+                <span class="gp-ccard-loyalty-text" t-esc="loyalty.text"/>
+            </div>
+            <div t-if="state.open and favorites.length" class="gp-ccard-favs">
+                <span class="gp-ccard-favs-title">Usually buys</span>
+                <button t-foreach="favorites" t-as="product" t-key="product.id" type="button"
+                        class="gp-chip" t-on-click="() => this.addFavorite(product)">
+                    <i class="fa fa-plus"/> <t t-esc="product.display_name"/>
+                </button>
+            </div>
+        </div>
+    </t>
+</templates>

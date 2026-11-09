@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <!-- Start-up screen: the standard three dots replaced by a branded card -->
+    <t t-name="garese_pos.Loader" t-inherit="point_of_sale.Loader" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('pos-loader')]" position="attributes">
+            <attribute name="class">pos-loader gp-loader</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('loader-feedback')]" position="replace">
+            <div t-if="!props.loader.error" class="gp-loader-card" t-translation="off">
+                <div class="gp-loader-logo">
+                    <span class="gp-loader-ring"/>
+                    <i class="fa fa-shopping-bag"/>
+                </div>
+                <div class="gp-loader-title">GARESE <b>POS</b></div>
+                <div class="gp-loader-message" t-key="gpState.index">
+                    <t t-esc="gpMessage"/>
+                </div>
+                <div class="gp-loader-bar"><span/></div>
+            </div>
+        </xpath>
+    </t>
+</templates>

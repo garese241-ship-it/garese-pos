@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="gp_group_pos_cashier_only" model="res.groups">
+        <field name="name">Point of Sale: Cash Register Only</field>
+        <field name="comment">The user goes straight to the Point of Sale after login and has no Odoo menu.</field>
+    </record>
+    <record id="gp_group_brand" model="res.groups">
+        <field name="name">Product Brands</field>
+        <field name="comment">Shows the Brand field on the products and the list of brands.</field>
+    </record>
+</odoo>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="garese_pos.ProductScreen" t-inherit="point_of_sale.ProductScreen" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('product-screen')]" position="attributes">
+            <attribute name="t-att-class">{ 'gp-screen': gpLayout }</attribute>
+        </xpath>
+
+        <!-- Cart header, GARESE buttons, customer card -->
+        <xpath expr="//OrderSummary" position="before">
+            <t t-if="gpLayout">
+                <div class="gp-cart-header">
+                    <span class="gp-cart-icon"><i class="fa fa-shopping-cart"/></span>
+                    <span class="gp-cart-title">Cart</span>
+                    <span class="gp-cart-count" t-esc="gpItemCountLabel"/>
+                    <button t-if="gpCanClearCart" type="button" class="gp-cart-clear" t-on-click="() => this.gpClearCart()">
+                        <i class="fa fa-trash-o"/> Empty
+                    </button>
+                </div>
+                <GpCartButtons/>
+                <GpCustomerCard t-if="pos.config.gp_customer_card and currentOrder?.getPartner()"
+                                partner="currentOrder.getPartner()"/>
+            </t>
+        </xpath>
+
+        <!-- Suggestions + totals -->
+        <xpath expr="//OrderSummary" position="after">
+            <t t-if="gpLayout">
+                <GpSuggestions t-if="pos.config.gp_suggestions and gpSelectedTemplate"
+                               template="gpSelectedTemplate"/>
+                <div class="gp-summary">
+                    <t t-set="gpSum" t-value="gpSummary"/>
+                    <div class="gp-summary-row">
+                        <span><i class="fa fa-calculator"/> Subtotal</span>
+                        <span class="gp-summary-subtotal" t-esc="gpSum.subtotal"/>
+                    </div>
+                    <div class="gp-summary-row" t-att-class="{ 'gp-has-discount': gpSum.hasDiscount }">
+                        <span><i class="fa fa-tag"/> Discount</span>
+                        <span class="gp-summary-discount" t-esc="gpSum.discount"/>
+                    </div>
+                    <div class="gp-summary-row">
+                        <span><i class="fa fa-percent"/> Taxes<t t-if="gpSum.taxRate"> (<t t-esc="gpSum.taxRate"/>)</t></span>
+                        <span class="gp-summary-tax" t-esc="gpSum.tax"/>
+                    </div>
+                    <div class="gp-summary-total">
+                        <span>Total</span>
+                        <span class="gp-summary-total-value" t-esc="gpSum.total"/>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+
+        <!-- Pads: actions | numpad | calculator -->
+        <xpath expr="//div[hasclass('pads')]" position="attributes">
+            <attribute name="t-if">!gpLayout</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('pads')]" position="after">
+            <div t-if="gpLayout" class="gp-pads">
+                <div class="gp-pads-actions">
+                    <div class="control-buttons gp-side-buttons">
+                        <ControlButtons onClickMore.bind="displayAllControlPopup"/>
+                    </div>
+                    <button type="button" class="pay pay-order-button gp-pay-button btn btn-primary"
+                            t-att-disabled="currentOrder?.isEmpty()" t-on-click="() => pos.pay()">
+                        <span class="gp-pay-icon"><i class="fa fa-angle-right"/></span>
+                        <span>Payment</span>
+                    </button>
+                </div>
+                <div class="gp-numpad-wrap" t-att-class="{ 'gp-numpad-off': !currentOrder?.getSelectedOrderline() }">
+                    <Numpad class="'d-grid gp-numpad'" buttons="getNumpadButtons()" onClick.bind="onNumpadClick"/>
+                </div>
+                <GpCalculator t-if="pos.gpShowCalculator" onClose="() => pos.gpToggleCalculator()"/>
+            </div>
+        </xpath>
+
+        <!-- Right pane: GARESE catalog -->
+        <xpath expr="//div[hasclass('rightpane')]/div[1]" position="attributes">
+            <attribute name="t-if">!gpLayout</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('rightpane')]/div[1]" position="after">
+            <GpCatalog t-if="gpLayout" onAdd="(product) => this.addProductToOrder(product)"
+                       cartQty="state.quantityByProductTmplId"/>
+        </xpath>
+    </t>
+
+    <!-- Customer button: icon and "walk-in" label -->
+    <t t-name="garese_pos.SelectPartnerButton" t-inherit="point_of_sale.SelectPartnerButton" t-inherit-mode="extension">
+        <xpath expr="//t[@t-else='']" position="replace">
+            <span t-else="" class="gp-walkin">Walk-in Customer</span>
+        </xpath>
+        <xpath expr="//button[hasclass('set-partner')]/div" position="before">
+            <span class="gp-partner-icon"><i class="fa fa-user"/></span>
+        </xpath>
+    </t>
+
+    <!-- Lines of the cart: the summary provides `gp` -->
+    <t t-name="garese_pos.OrderSummary" t-inherit="point_of_sale.OrderSummary" t-inherit-mode="extension">
+        <xpath expr="//Orderline" position="attributes">
+            <attribute name="gp">gpLineData(line)</attribute>
+        </xpath>
+    </t>
+
+    <t t-name="garese_pos.Orderline" t-inherit="point_of_sale.Orderline" t-inherit-mode="extension">
+        <xpath expr="//li[hasclass('orderline')]" position="attributes">
+            <attribute name="t-attf-class">{{ props.gp ? 'gp-orderline' : '' }}</attribute>
+        </xpath>
+        <xpath expr="//li[hasclass('orderline')]/div[1]" position="before">
+            <div t-if="props.gp" class="gp-ol-img">
+                <img t-if="props.gp.imageUrl" t-att-src="props.gp.imageUrl" alt=""/>
+                <i t-else="" class="fa fa-cube"/>
+            </div>
+        </xpath>
+        <xpath expr="//ul[hasclass('info-list')]" position="before">
+            <div t-if="props.gp" class="gp-ol-controls">
+                <span class="gp-ol-unit" t-esc="props.gp.unitPrice"/>
+                <span t-if="props.gp.promo" class="gp-ol-promo" title="Promotion">-<t t-esc="props.gp.promo.percent"/>%</span>
+                <div t-if="props.gp.canStep" class="gp-ol-stepper">
+                    <button type="button" class="gp-ol-step gp-ol-minus" t-on-click.stop="props.gp.onMinus" aria-label="Decrease quantity" title="Decrease quantity">
+                        <i class="fa fa-minus"/>
+                    </button>
+                    <span class="gp-ol-qty" t-esc="props.gp.qtyLabel"/>
+                    <button type="button" class="gp-ol-step gp-ol-plus" t-on-click.stop="props.gp.onPlus" aria-label="Increase quantity" title="Increase quantity">
+                        <i class="fa fa-plus"/>
+                    </button>
+                </div>
+                <span t-else="" class="gp-ol-qty gp-ol-qty-fixed">× <t t-esc="props.gp.qtyLabel"/></span>
+                <span t-if="props.gp.unitLabel" class="gp-ol-uom" t-esc="props.gp.unitLabel"/>
+            </div>
+        </xpath>
+        <xpath expr="//ul[hasclass('info-list')]" position="after">
+            <button t-if="props.gp" type="button" class="gp-ol-remove" t-on-click.stop="props.gp.onRemove" aria-label="Remove line" title="Remove line">
+                <i class="fa fa-trash-o"/>
+            </button>
+        </xpath>
+    </t>
+
+</templates>

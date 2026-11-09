@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <!-- "Payment successful" screen (large screens) -->
+    <t t-name="garese_pos.ReceiptScreen" t-inherit="point_of_sale.ReceiptScreen" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('receipt-screen')]" position="attributes">
+            <attribute name="t-att-class">{ 'gp-receipt-screen': gpLayout }</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('o_payment_successful')]/div[1]" position="attributes">
+            <attribute name="t-if">!gpLayout</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('o_payment_successful')]/div[1]" position="after">
+            <div t-if="gpLayout" class="gp-rs-hero">
+                <div class="gp-rs-check" t-att-class="{ 'gp-fx': pos.config.gp_fx_animations }"><i class="fa fa-check"/></div>
+                <div t-if="pos.config.gp_fx_animations" class="gp-rs-confetti" aria-hidden="true">
+                    <i t-foreach="[1,2,3,4,5,6,7,8,9,10,11,12,13,14]" t-as="n" t-key="n"/>
+                </div>
+                <h1>
+                    <t t-if="currentOrder.isRefund">Refund Initiated</t>
+                    <t t-else="">Payment Successful</t>
+                </h1>
+                <div class="gp-rs-sub">
+                    <div>The customer paid <b t-esc="gpPaidAmount"/>
+                        <span t-if="this.pos.canEditPayment(currentOrder)" class="edit-order-payment gp-rs-edit" role="button"
+                              t-on-click="() => this.pos.orderDetails(this.currentOrder)">Edit Payment</span>
+                    </div>
+                    <div t-if="gpChange" class="gp-rs-change">Change to give back <b t-esc="gpChange"/></div>
+                    <div>Please hand the receipt to the customer.</div>
+                </div>
+                <div class="gp-rs-actions">
+                    <button type="button" class="gp-rs-btn gp-rs-primary gp-rs-print" t-on-click="() => doFullPrint.call()">
+                        <i t-attf-class="fa {{ doFullPrint.status === 'loading' ? 'fa-circle-o-notch fa-spin' : 'fa-print' }}"/>
+                        Print receipt
+                    </button>
+                    <button type="button" class="gp-rs-btn gp-rs-email" t-on-click="() => this.gpSendEmail()">
+                        <i t-attf-class="fa {{ sendReceipt.status === 'loading' ? 'fa-circle-o-notch fa-spin' : 'fa-envelope-o' }}"/>
+                        Send by email
+                    </button>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('receipt-options')]" position="attributes">
+            <attribute name="t-att-class">{ 'gp-rs-options': gpLayout }</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('validation-buttons')]/button[@name='done']" position="inside">
+            <span class="gp-rs-label"><i class="fa fa-shopping-cart"/> New sale</span>
+        </xpath>
+        <xpath expr="//div[hasclass('validation-buttons')]" position="inside">
+            <button type="button" class="gp-rs-btn gp-rs-primary gp-rs-reprint" t-on-click="() => doFullPrint.call()">
+                <i t-attf-class="fa {{ doFullPrint.status === 'loading' ? 'fa-circle-o-notch fa-spin' : 'fa-print' }}"/>
+                Print again
+            </button>
+            <button type="button" class="gp-rs-btn gp-rs-share" t-on-click="() => this.gpShare()">
+                <i t-attf-class="fa {{ gpState.sharing ? 'fa-circle-o-notch fa-spin' : 'fa-share-alt' }}"/>
+                Share
+            </button>
+        </xpath>
+    </t>
+
+    <!-- Sales receipt -->
+    <t t-name="garese_pos.OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('pos-receipt')]" position="attributes">
+            <attribute name="t-attf-class">gp-receipt gp-rc-font-{{ gp.font }} {{ gp.showTax ? '' : 'gp-rc-no-tax' }}</attribute>
+        </xpath>
+        <xpath expr="//ReceiptHeader" position="after">
+            <t t-set="gpData" t-value="gp"/>
+            <div class="gp-rc-company">
+                <div class="gp-rc-company-name" t-esc="order.company.name"/>
+                <div t-if="gpData.street" class="gp-rc-address" t-esc="gpData.street"/>
+                <div t-if="gpData.cityLine" class="gp-rc-address" t-esc="gpData.cityLine"/>
+            </div>
+            <div class="gp-rc-title">Till receipt</div>
+            <div t-if="gpData.number" class="gp-rc-number">No. <t t-esc="gpData.number"/></div>
+            <div class="gp-rc-meta">
+                <span t-if="gpData.date">Date: <t t-esc="gpData.date"/></span>
+                <span>Register: <t t-esc="gpData.register"/></span>
+                <span t-if="gpData.cashier">Cashier: <t t-esc="gpData.cashier"/></span>
+                <span>Customer: <t t-if="gpData.partner" t-esc="gpData.partner"/><t t-else="">Walk-in</t></span>
+                <span t-if="gpData.waiter" class="gp-rc-waiter">Served by: <t t-esc="gpData.waiter"/></span>
+            </div>
+            <div class="gp-rc-colhead">
+                <span class="gp-rc-colname">Designation</span>
+                <span class="gp-rc-nums">
+                    <span>Qty</span>
+                    <span>Unit price</span>
+                    <span>Total price</span>
+                </span>
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('receipt-total')]" position="before">
+            <div class="gp-rc-sums">
+                <div><span>Subtotal</span><span t-esc="formatCurrency(gpData.subtotal)"/></div>
+                <div><span>Discount</span><span><t t-if="gpData.discount">- </t><t t-esc="formatCurrency(gpData.discount)"/></span></div>
+                <div t-if="gpData.showTax">
+                    <span>Taxes<t t-if="gpData.taxRate"> (<t t-esc="gpData.taxRate"/>)</t></span>
+                    <span t-esc="formatCurrency(gpData.tax)"/>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('paymentlines')]" position="inside">
+            <div t-if="line.transaction_id and line.payment_method_id.gp_ask_reference" class="gp-rc-ref">Ref.: <t t-esc="line.transaction_id"/></div>
+        </xpath>
+        <!-- Change: always printed as a positive amount -->
+        <xpath expr="//div[hasclass('receipt-change')]" position="replace">
+            <div t-if="order.showChange" class="pos-receipt-amount receipt-change">
+                <span class="label-change">Change</span>
+                <span t-out="formatCurrency(Math.abs(order.change))" class="pos-receipt-right-align font-monospace"/>
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('before-footer')]" position="before">
+            <div t-if="gpData.note" class="gp-rc-note" t-esc="gpData.note"/>
+        </xpath>
+    </t>
+
+    <!-- Order line: cells of the 4-column receipt -->
+    <t t-name="garese_pos.OrderlineReceipt" t-inherit="point_of_sale.Orderline" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('product-price')]" position="after">
+            <t t-set="gpRc" t-value="gpReceipt"/>
+            <t t-if="gpRc">
+                <div t-if="gpRc.promo" class="gp-rc-promo">
+                    Promo -<t t-esc="gpRc.promo.percent"/>% (<s t-esc="gpRc.promo.oldPrice"/>)
+                </div>
+                <span class="gp-rc-nums">
+                    <span class="gp-rc-cell gp-rc-qty" t-esc="gpRc.qty"/>
+                    <span class="gp-rc-cell gp-rc-pu" t-esc="gpRc.unit"/>
+                    <span class="gp-rc-cell gp-rc-total" t-esc="gpRc.total"/>
+                </span>
+            </t>
+        </xpath>
+    </t>
+
+</templates>

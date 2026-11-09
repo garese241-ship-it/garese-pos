@@ -1,0 +1,754 @@
+// =====================================================================
+// GARESE POS - payment screen (large screens only: .gp-payment is set on
+// the desktop branch of the standard template).
+// Uses the variables and mixins declared in garese_pos.scss.
+// =====================================================================
+
+// Solid tiles of the payment method icons
+$gp-solid-colors: (
+    blue: #2f7de1,
+    green: #2e9e5b,
+    orange: #f08a24,
+    red: #e23d3d,
+    purple: #7c5ce0,
+    teal: #17a398,
+    pink: #e0559b,
+    yellow: #e5b300,
+    grey: #6b7190,
+);
+
+@mixin gp-card {
+    border: 1px solid $gp-line;
+    border-radius: 14px;
+    background: $gp-surface;
+}
+
+.pos .payment-screen.gp-payment {
+    background: $gp-page !important;
+    color: $gp-ink;
+
+    // --- title bar ----------------------------------------------------
+    .gp-pay-top {
+        position: relative;
+        flex: 0 0 auto;
+        align-items: flex-start !important;
+        min-height: 78px;
+        padding: 14px 18px 4px !important;
+        border: 0 !important;
+
+        .button.back {
+            position: relative;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 16px;
+            border: 1px solid $gp-line;
+            border-radius: 10px;
+            background: $gp-surface;
+            color: $gp-ink;
+            font-size: 1rem;
+            font-weight: 600;
+
+            &:hover {
+                background: $gp-primary-soft;
+            }
+            // "Back" is replaced by the explicit label when it is rendered
+            &:has(.gp-back-text) .back_text {
+                display: none;
+            }
+        }
+        .gp-pay-title {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 12px;
+            text-align: center;
+            pointer-events: none;
+
+            h1 {
+                font-size: 1.45rem;
+                font-weight: 700;
+            }
+        }
+        .gp-pay-hint {
+            margin: 4px 0 0;
+            color: $gp-muted;
+            font-size: 0.9rem;
+        }
+    }
+
+    // --- three columns --------------------------------------------------
+    // The three columns keep the proportions of the design on wide screens.
+    .gp-pay-top,
+    .gp-pay-cols {
+        width: 100%;
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+    .gp-pay-cols {
+        display: flex;
+        flex: 1 1 auto;
+        min-height: 0;
+        gap: 14px;
+        padding: 6px 18px 16px;
+    }
+    .gp-pay-left,
+    .gp-pay-center,
+    .gp-pay-right {
+        width: auto !important;
+        min-width: 0;
+        border: 0 !important;
+        background: transparent !important;
+    }
+    .gp-pay-left {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        overflow: hidden;
+        flex: 0 0 clamp(240px, 26%, 370px);
+    }
+    .gp-pay-center {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        gap: 12px;
+        padding: 0 !important;
+    }
+    .gp-pay-right {
+        display: flex;
+        overflow: hidden;
+        flex: 0 0 clamp(260px, 26%, 370px);
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    // --- left: payment methods, totals, payment lines -------------------
+    // The list of methods scrolls when it is long; the payments already
+    // entered and the totals always stay visible under it.
+    .paymentmethods-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        min-height: 0;
+        overflow: hidden !important;
+    }
+    .paymentmethods {
+        @include gp-card;
+        order: 1;
+        flex: 0 1 auto;
+        min-height: 150px;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    .title-category {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        padding: 12px 16px !important;
+        border: 0 !important;
+        background: $gp-primary !important;
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 700;
+
+        &::before {
+            content: "\f09d"; // fa-credit-card
+            margin-right: 10px;
+            font-family: FontAwesome;
+            font-weight: 400;
+        }
+    }
+    .paymentmethod {
+        display: flex;
+        align-items: center;
+        min-height: 56px;
+        padding: 4px 14px 4px 18px;
+        border-color: $gp-line !important;
+        background: $gp-surface;
+        color: $gp-ink;
+        text-align: left;
+
+        &:last-child {
+            border-bottom: 0 !important;
+        }
+        &:hover {
+            background: $gp-hover;
+        }
+        &.gp-selected {
+            background: $gp-primary-soft;
+            box-shadow: inset 0 0 0 2px $gp-primary;
+
+            .gp-pm-chevron {
+                visibility: visible;
+            }
+        }
+        .payment-method-display {
+            gap: 14px;
+            min-width: 0;
+        }
+        .payment-method-icon {
+            width: 46px;
+            height: 46px;
+            max-width: none;
+            max-height: none;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .payment-name {
+            flex: 1 1 auto;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .gp-pm-chevron {
+            visibility: hidden;
+            color: $gp-primary;
+            font-size: 1.3rem;
+        }
+    }
+    .gp-pm-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 46px;
+        height: 46px;
+        border-radius: 10px;
+        background: map-get($gp-solid-colors, grey);
+        color: #fff;
+        font-size: 1.3rem;
+    }
+    @each $name, $color in $gp-solid-colors {
+        .gp-pm-#{$name} {
+            background: $color;
+        }
+    }
+
+    .gp-pay-totals {
+        @include gp-card;
+        order: 3;
+        flex: 0 0 auto;
+        padding: 14px 18px;
+    }
+    .gp-pay-totals-label {
+        font-size: 1.05rem;
+        font-weight: 500;
+    }
+    .gp-pay-totals-value {
+        margin-bottom: 10px;
+        color: $gp-success;
+        font-size: 1.7rem;
+        font-weight: 700;
+        line-height: 1.25;
+    }
+    .gp-pay-totals-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 2px 0;
+        color: $gp-muted;
+
+        > span:last-child {
+            color: $gp-ink;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        &.gp-pay-totals-due > span:last-child {
+            color: $gp-danger;
+        }
+        &.gp-pay-totals-change > span:last-child {
+            color: $gp-success;
+        }
+    }
+
+    // payment lines (several methods on one order, electronic payments)
+    .paymentlines {
+        order: 2;
+        flex: 0 0 auto;
+        gap: 6px;
+        max-height: 34%;
+        overflow-y: auto;
+
+        &:not(:has(.paymentline)) {
+            display: none !important; // no payment yet: no empty gap
+        }
+
+        > .title-category {
+            display: none;
+        }
+        .paymentline {
+            @include gp-card;
+            border-radius: 10px;
+            background: $gp-surface !important;
+
+            &.selected {
+                border-color: $gp-primary;
+                box-shadow: inset 0 0 0 1px $gp-primary;
+            }
+            &.electronic_payment {
+                padding: 8px 14px;
+            }
+        }
+        .payment-infos {
+            gap: 8px;
+            margin: 0 !important;
+            padding: 9px 4px 9px 14px !important;
+            font-weight: 600;
+        }
+        .payment-amount {
+            margin-left: auto;
+            padding: 0 !important;
+            white-space: nowrap;
+        }
+        .gp-pl-ref {
+            overflow: hidden;
+            color: $gp-muted;
+            font-size: 0.8rem;
+            font-weight: 400;
+            text-overflow: ellipsis;
+        }
+        .delete-button {
+            margin: 0 4px !important;
+            padding: 4px 8px !important;
+            color: $gp-danger;
+
+            .fa {
+                font-size: 1.2rem;
+            }
+        }
+    }
+
+    // --- center: amount, one-tap amounts, numpad, validation ----------
+    .paymentlines-container {
+        // standard status block, replaced by .gp-pay-amount
+        display: none;
+    }
+    .gp-pay-amount {
+        @include gp-card;
+        flex: 0 0 auto;
+        padding: 16px 18px 18px;
+        text-align: center;
+    }
+    .gp-pay-amount-label {
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+    .gp-pay-amount-value {
+        color: $gp-success;
+        font-size: 2.6rem;
+        font-weight: 700;
+        line-height: 1.2;
+    }
+    .gp-pay-amount-change .gp-pay-amount-value {
+        color: $gp-primary;
+    }
+    .gp-pay-amount-refund .gp-pay-amount-value {
+        color: $gp-danger;
+    }
+    .gp-pay-quick {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+        margin-top: 14px;
+    }
+    .gp-pay-quick-btn {
+        @include gp-reset-button;
+        min-height: 46px;
+        padding: 4px 6px;
+        border-radius: 10px;
+        background: $gp-page;
+        font-size: 1.05rem;
+        font-weight: 700;
+        white-space: nowrap;
+
+        &:hover {
+            background: $gp-primary-soft;
+        }
+        &:active {
+            background: $gp-primary;
+            color: #fff;
+        }
+        &.gp-pay-exact {
+            font-size: 0.85rem;
+            white-space: normal;
+        }
+    }
+
+    .gp-pay-numpad {
+        display: flex;
+        flex: 1 1 auto;
+        min-height: 0;
+    }
+    .gp-pay-numpad .numpad {
+        width: 100%;
+        display: grid !important;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-auto-rows: minmax(52px, 1fr);
+        gap: 10px;
+        flex: 1 1 auto;
+        margin: 0;
+
+        > button {
+            width: auto;
+            padding: 0 !important;
+            border: 1px solid $gp-line !important;
+            border-radius: 12px !important;
+            background: $gp-surface;
+            color: $gp-ink;
+            font-size: 1.5rem;
+            font-weight: 600 !important;
+
+            &:hover {
+                background: $gp-primary-soft;
+            }
+            // "+" keys
+            &:nth-child(4),
+            &:nth-child(8),
+            &:nth-child(12) {
+                background: $gp-primary-soft;
+                color: $gp-primary;
+                font-size: 1.15rem;
+            }
+        }
+    }
+
+    .gp-validate {
+        display: flex;
+        align-items: center;
+        border: 1px solid $gp-success;
+        cursor: pointer;
+        flex: 0 0 auto;
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+        gap: 14px;
+        min-height: 72px;
+        padding: 12px 22px !important;
+        border-color: $gp-success;
+        border-radius: 12px !important;
+        background: $gp-success;
+        color: #fff;
+        font-size: 1.15rem;
+
+        &:hover {
+            background: darken($gp-success, 5%);
+        }
+        &.disabled {
+            opacity: 0.5;
+        }
+        .pay-circle {
+            margin: 0 !important;
+            font-size: 0;
+
+            // check mark instead of the chevron
+            &::before {
+                content: "\f00c";
+                font-family: FontAwesome;
+                font-size: 1.3rem;
+                font-weight: 400;
+            }
+            .oi {
+                display: none;
+            }
+        }
+        &:has(.gp-validate-text) .next_text {
+            display: none;
+        }
+        .gp-validate-amount {
+            margin-left: auto;
+            font-size: 1.25rem;
+            white-space: nowrap;
+        }
+    }
+
+    // --- right: customer, options, order recap, note ------------------
+    .payment-buttons {
+        flex: 0 0 auto;
+        flex-direction: row !important;
+        gap: 8px;
+
+        .button {
+            flex: 1 1 auto;
+            padding: 8px 12px !important;
+            border: 1px solid $gp-line !important;
+            border-radius: 10px !important;
+            background: $gp-surface;
+            color: $gp-ink;
+            font-size: 0.9rem;
+            font-weight: 600;
+
+            &.highlight {
+                border-color: $gp-primary !important;
+                background: $gp-primary-soft !important;
+                color: $gp-primary !important;
+            }
+        }
+        .partner-button {
+            display: flex;
+            flex: 1 0 100%;
+            align-items: center;
+            order: -1;
+            min-width: 0;
+            padding: 13px 16px !important;
+            border-color: $gp-primary !important;
+            border-radius: 12px !important;
+            background: $gp-primary !important;
+            color: #fff !important;
+            font-size: 1.05rem;
+            font-weight: 700;
+
+            .partner-name,
+            .gp-walkin {
+                flex: 1 1 auto;
+                min-width: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            &.highlight {
+                border-color: $gp-primary !important;
+                background: $gp-primary !important;
+                color: #fff !important;
+            }
+            // no customer: "Customer" is replaced by the walk-in label
+            &:not(.highlight) .partner-name {
+                display: none;
+            }
+            .fa-user {
+                font-size: 1.15rem;
+                margin-right: 12px !important;
+            }
+            .gp-partner-edit {
+                margin-left: 10px;
+                opacity: 0.85;
+            }
+        }
+    }
+    .gp-pay-recap {
+        @include gp-card;
+        display: flex;
+        flex: 1 1 0;
+        flex-direction: column;
+        min-height: 180px;
+        overflow: hidden;
+    }
+    .gp-pay-recap-head {
+        display: flex;
+        flex: 0 0 auto;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        font-size: 1rem;
+        font-weight: 600;
+
+        .fa {
+            color: $gp-muted;
+        }
+    }
+    .gp-pay-edit {
+        @include gp-reset-button;
+        margin-left: auto;
+        padding: 5px 12px;
+        border-radius: 8px;
+        background: $gp-page;
+        font-size: 0.9rem;
+        font-weight: 600;
+
+        &:hover {
+            background: $gp-primary-soft;
+        }
+    }
+    .gp-pay-lines {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto;
+        padding: 0 14px;
+    }
+    .gp-pay-line {
+        display: grid;
+        grid-template-columns: 48px minmax(0, 1fr) auto;
+        grid-template-areas:
+            "img name name"
+            "img detail total";
+        column-gap: 12px;
+        align-items: center;
+        padding: 8px 0;
+
+        &.gp-pay-line-child {
+            padding-left: 16px;
+            border-left: 3px solid $gp-line;
+        }
+    }
+    .gp-pay-line-img {
+        grid-area: img;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        color: var(--gp-faint);
+        font-size: 1.3rem;
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+    }
+    .gp-pay-line-name {
+        grid-area: name;
+        font-weight: 600;
+        line-height: 1.25;
+    }
+    .gp-pay-line-detail {
+        grid-area: detail;
+        color: $gp-muted;
+        font-size: 0.9rem;
+    }
+    .gp-pay-line-total {
+        grid-area: total;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+    .gp-pay-sums {
+        flex: 0 0 auto;
+        padding: 8px 14px;
+        border-top: 1px solid $gp-line;
+    }
+    .gp-pay-sum {
+        display: flex;
+        justify-content: space-between;
+        padding: 2px 0;
+        color: $gp-muted;
+
+        > span:last-child {
+            color: $gp-ink;
+            font-weight: 600;
+        }
+        &.gp-has-discount > span:last-child {
+            color: $gp-danger;
+        }
+    }
+    .gp-pay-total {
+        display: flex;
+        flex: 0 0 auto;
+        align-items: baseline;
+        justify-content: space-between;
+        padding: 10px 14px 12px;
+        background: $gp-primary-soft;
+        font-size: 1.25rem;
+        font-weight: 700;
+    }
+    .gp-pay-total-value {
+        color: $gp-success;
+    }
+    .gp-pay-note {
+        @include gp-reset-button;
+        @include gp-card;
+        display: flex;
+        flex: 0 0 auto;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        min-height: 56px;
+        padding: 10px 14px;
+        font-size: 1.05rem;
+        font-weight: 600;
+
+        &:hover {
+            background: $gp-primary-soft;
+        }
+        .fa {
+            color: $gp-primary;
+            font-size: 1.2rem;
+        }
+        &.gp-has-note {
+            justify-content: flex-start;
+            font-weight: 500;
+            text-align: left;
+        }
+        .gp-pay-note-text {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+            font-size: 0.95rem;
+        }
+    }
+}
+
+// --- Odoo 19 structure ------------------------------------------------
+.pos .payment-screen.gp-payment {
+    .gp-pay-top {
+        display: flex;
+        align-items: flex-start;
+    }
+    .gp-pay-title h1 {
+        margin: 0;
+        font-weight: 700;
+    }
+    .gp-pm-card {
+        display: flex;
+        flex: 0 1 auto;
+        flex-direction: column;
+        min-height: 0;
+        border: 1px solid $gp-line;
+        border-radius: 14px;
+        background: $gp-surface;
+        overflow: hidden;
+
+        .paymentmethods {
+            border: 0 !important;
+            border-radius: 0;
+            min-height: 0;
+        }
+    }
+    .gp-pm-head {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 16px;
+        background: $gp-primary;
+        color: #fff;
+        font-weight: 700;
+    }
+    .paymentmethod.gp-pm {
+        gap: 14px;
+        cursor: pointer;
+        border-bottom: 1px solid $gp-line;
+
+        .gp-pm-amount {
+            color: $gp-muted;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+    }
+    .gp-pay-lines-box {
+        flex: 0 0 auto;
+        max-height: 210px;
+        overflow-y: auto;
+
+        .paymentlines {
+            margin: 0 !important;
+            max-height: none !important;
+        }
+        .payment-infos {
+            font-size: 1rem !important;
+        }
+    }
+    .gp-validate {
+        &.disabled {
+            pointer-events: auto;
+        }
+        > .fa-check {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(#fff, 0.2);
+        }
+    }
+}

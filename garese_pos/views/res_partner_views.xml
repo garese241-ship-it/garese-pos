@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="gp_res_partner_form_birthday" model="ir.ui.view">
+        <field name="name">res.partner.form.garese.pos.birthday</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="vat" position="after">
+                <field name="gp_birthday" invisible="is_company"/>
+            </field>
+        </field>
+    </record>
+</odoo>

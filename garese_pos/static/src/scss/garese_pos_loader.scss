@@ -1,0 +1,104 @@
+// ---------------------------------------------------------------------
+// Start-up screen
+// ---------------------------------------------------------------------
+@keyframes gp-loader-spin {
+    to { transform: rotate(360deg); }
+}
+@keyframes gp-loader-slide {
+    0% { left: -40%; }
+    100% { left: 100%; }
+}
+@keyframes gp-loader-fade {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: none; }
+}
+@keyframes gp-loader-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.pos-loader.gp-loader {
+    background: radial-gradient(circle at 30% 20%, #5b4cc4 0%, #3a2f8a 45%, #1e1a4f 100%);
+    font-family: Inter, "Lato", sans-serif;
+    color: #fff;
+
+    .gp-loader-card {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 420px;
+        max-width: 86vw;
+        transform: translate(-50%, -54%);
+    }
+    .gp-loader-logo {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 96px;
+        height: 96px;
+        border-radius: 28px;
+        background: rgba(255, 255, 255, 0.12);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        font-size: 2.6rem;
+        animation: gp-loader-float 2.4s ease-in-out infinite;
+
+        .gp-loader-ring {
+            position: absolute;
+            inset: -9px;
+            border: 3px solid rgba(255, 255, 255, 0.18);
+            border-top-color: #fff;
+            border-radius: 34px;
+            animation: gp-loader-spin 1.3s linear infinite;
+        }
+    }
+    .gp-loader-title {
+        margin-top: 26px;
+        font-size: 2rem;
+        font-weight: 300;
+        letter-spacing: 0.14em;
+
+        b {
+            font-weight: 800;
+        }
+    }
+    .gp-loader-message {
+        min-height: 1.6em;
+        margin-top: 10px;
+        font-size: 1.02rem;
+        color: rgba(255, 255, 255, 0.78);
+        animation: gp-loader-fade 0.5s ease-out;
+    }
+    .gp-loader-bar {
+        position: relative;
+        width: 100%;
+        height: 6px;
+        margin-top: 28px;
+        border-radius: 3px;
+        background: rgba(255, 255, 255, 0.16);
+        overflow: hidden;
+
+        span {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 40%;
+            border-radius: 3px;
+            background: linear-gradient(90deg, transparent, #fff, transparent);
+            animation: gp-loader-slide 1.3s ease-in-out infinite;
+        }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .gp-loader-logo,
+        .gp-loader-ring,
+        .gp-loader-bar span {
+            animation: none;
+        }
+        .gp-loader-bar span {
+            left: 30%;
+        }
+    }
+}

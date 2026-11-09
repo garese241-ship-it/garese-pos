@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <!-- Closing: the cashier counts the cash, totals are hidden -->
+    <t t-name="garese_pos.ClosePosPopupTotals" t-inherit="point_of_sale.ClosePosPopup" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('total-orders')]" position="attributes">
+            <attribute name="t-if">props.gp_show_totals !== false</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('payment-methods-overview')]" position="attributes">
+            <attribute name="t-if">props.gp_show_totals !== false</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('payment-methods-overview')]" position="before">
+            <div t-if="props.gp_show_totals === false" class="gp-totals-note">
+                <i class="fa fa-info-circle me-2"/>Count the cash in the drawer and type the amount. The totals are reserved to managers.
+            </div>
+        </xpath>
+        <xpath expr="//button[@t-on-click='downloadSalesReport']" position="attributes">
+            <attribute name="t-if">props.gp_show_totals !== false</attribute>
+        </xpath>
+    </t>
+
+    <!-- Top bar: no sales report for cashiers, no way to the back-office -->
+    <t t-name="garese_pos.NavbarCashierControl" t-inherit="point_of_sale.Navbar" t-inherit-mode="extension">
+        <xpath expr="//DropdownItem[@onSelected='() => this.showSaleDetails()']" position="attributes">
+            <attribute name="t-if">hardwareProxy.printer and !pos.gpHideTotals</attribute>
+        </xpath>
+        <xpath expr="//DropdownItem[@onSelected='() => pos.closePos()']" position="attributes">
+            <attribute name="t-if">!pos.gpCashierOnly</attribute>
+        </xpath>
+    </t>
+</templates>

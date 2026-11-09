@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="garese_pos.GpClock">
+        <div class="gp-clock">
+            <span class="gp-clock-icon"><i class="fa fa-clock-o"/></span>
+            <span class="gp-clock-text">
+                <span class="gp-clock-time" t-esc="time"/>
+                <span class="gp-clock-date" t-esc="date"/>
+            </span>
+        </div>
+    </t>
+
+    <t t-name="garese_pos.Navbar" t-inherit="point_of_sale.Navbar" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('pos-topheader')]" position="attributes">
+            <attribute name="t-att-class">{ 'gp-topheader': !ui.isSmall }</attribute>
+        </xpath>
+        <!-- Shop name (or logo) before the Register / Orders buttons -->
+        <xpath expr="//div[hasclass('navbar-menu')]" position="before">
+            <span t-if="!ui.isSmall" class="gp-nav-shop" t-att-title="pos.config.name">
+                <img t-if="gpLogoUrl" class="gp-nav-logo" t-att-src="gpLogoUrl" alt=""/>
+                <t t-else="">
+                    <i class="fa fa-building-o"/>
+                    <span class="gp-nav-shop-name" t-esc="pos.config.name"/>
+                </t>
+            </span>
+        </xpath>
+        <!-- Clock and network status next to the cashier -->
+        <xpath expr="//CashierName" position="before">
+            <span t-if="!ui.isSmall and gpOnline and !pos.data.network.loading" class="gp-online">
+                <i class="fa fa-wifi"/> <span>Online</span>
+            </span>
+            <GpClock t-if="!ui.isSmall"/>
+        </xpath>
+        <xpath expr="//DropdownItem[@onSelected='() => pos.closePos()']" position="before">
+            <DropdownItem t-if="!ui.isSmall" onSelected="() => pos.gpToggleCalculator()">
+                <t t-if="pos.gpShowCalculator">Hide Calculator</t>
+                <t t-else="">Show Calculator</t>
+            </DropdownItem>
+        </xpath>
+    </t>
+
+    <t t-name="garese_pos.CashierName" t-inherit="point_of_sale.CashierName" t-inherit-mode="extension">
+        <xpath expr="//img" position="after">
+            <span t-if="!ui.isSmall" class="gp-cashier-text">
+                <span class="gp-cashier-name" t-esc="gpName"/>
+                <span class="gp-cashier-role" t-esc="gpRole"/>
+            </span>
+        </xpath>
+    </t>
+
+</templates>

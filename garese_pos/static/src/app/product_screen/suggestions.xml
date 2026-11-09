@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="garese_pos.GpSuggestions">
+        <div t-if="suggestions.length" class="gp-suggest">
+            <span class="gp-suggest-title"><i class="fa fa-magic"/> Often bought together</span>
+            <div class="gp-suggest-list">
+                <button t-foreach="suggestions" t-as="product" t-key="product.id" type="button"
+                        class="gp-suggest-item" t-on-click="() => this.add(product)">
+                    <img t-if="imageUrl(product)" t-att-src="imageUrl(product)" alt=""/>
+                    <span class="gp-suggest-name" t-esc="product.display_name"/>
+                    <span class="gp-suggest-price" t-esc="price(product)"/>
+                    <i class="fa fa-plus-circle"/>
+                </button>
+            </div>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="garese_pos.GpCartButtons">
+        <div class="control-buttons gp-top-buttons">
+            <button t-if="canRefund" type="button" class="control-button btn btn-light gp-refund-button" t-on-click="() => this.clickRefund()">
+                <i class="fa fa-undo me-1" role="img" aria-label="Refund"/> Refund
+            </button>
+            <button type="button" class="control-button btn btn-light gp-code-button" t-on-click="() => pos.gpEnterCode()">
+                <i class="fa fa-barcode me-1" role="img" aria-label="Enter a code"/> Enter a code
+            </button>
+            <button type="button" class="control-button btn btn-light gp-recent-button" t-on-click="() => pos.gpPickRecentCustomer()"
+                    title="Recent customers (F6)">
+                <i class="fa fa-history me-1" role="img" aria-label="Recent customers"/> Recent
+            </button>
+            <button t-if="showPricelist" type="button" class="control-button btn btn-light gp-pricelist-button" t-on-click="() => this.clickPricelist()">
+                <i class="fa fa-th-list me-1" role="img" aria-label="Pricelist"/>
+                <t t-if="order?.pricelist_id" t-esc="order.pricelist_id.display_name"/>
+                <t t-else="">Pricelist</t>
+            </button>
+            <button t-if="pos.config.gp_bag_product_id" type="button" class="control-button btn btn-light gp-bag-button" t-on-click="() => pos.gpAddBag()">
+                <i class="fa fa-shopping-bag me-1" role="img" aria-label="Bag"/> Bag
+            </button>
+            <button t-if="pos.gpUseWaiter" type="button" class="control-button btn btn-light gp-waiter-button"
+                    t-att-class="{ 'gp-waiter-set': order?.gp_waiter_id }" t-on-click="() => pos.gpSelectWaiter()">
+                <i class="fa fa-id-badge me-1" role="img" aria-label="Waiter"/>
+                <t t-if="order?.gp_waiter_id" t-esc="order.gp_waiter_id.name"/>
+                <t t-else="">Waiter</t>
+            </button>
+        </div>
+    </t>
+</templates>
